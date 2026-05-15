@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adaptive CBC Learning - Student Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#006a34",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d8dadc",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-fixed": "#00210c",
+                        "background": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#c9a900",
+                        "secondary-fixed": "#d6e3ff",
+                        "secondary-container": "#b6d0ff",
+                        "on-surface-variant": "#3f4940",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-primary-container": "#f6fff3",
+                        "on-background": "#191c1e",
+                        "inverse-primary": "#7eda95",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#268549",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#becabd",
+                        "outline": "#6f7a6f",
+                        "on-primary-fixed-variant": "#005227",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed": "#ffe16d",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eceef0",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "tertiary": "#705d00",
+                        "on-tertiary-container": "#4c3f00",
+                        "inverse-surface": "#2d3133",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#455f88",
+                        "primary-fixed-dim": "#7eda95",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-tint": "#006d36",
+                        "on-secondary-container": "#3f5882",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#9af7af",
+                        "on-secondary-fixed-variant": "#2d476f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "headline-xl": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Nunito Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 106, 52, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed">
+<!-- Top Navigation (Mobile/Universal) -->
+<header class="bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm docked full-width top-0 sticky h-16 z-50 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop">
+<div class="flex items-center gap-base">
+<span class="text-headline-md-mobile font-headline-md-mobile font-extrabold text-primary tracking-tight">Adaptive CBC Learning</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-2 border border-outline-variant/50">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-48" placeholder="Search lessons..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 hover:bg-surface-container-high/50 transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high/50 transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary" data-icon="emoji_events">emoji_events</span>
+</button>
+<img alt="Student avatar" class="w-8 h-8 rounded-full object-cover border border-primary/20" data-alt="A bright and cheerful portrait of a primary school student smiling at the camera. The background is a soft-focus classroom setting with colorful educational charts. The lighting is warm and natural, creating an encouraging and positive atmosphere typical of a high-quality educational platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr_oStVxGBLulIZmZZgSYUBNrz2mwc18hGpvdhoc6fDMGyzefukkoMnQyWkaWYeYMTZCkTwYeyYi5fUZfuxgnvriO4kbPRBSbhInl8YzZT243u0fWWJqERuVyACsY7UBU1I54CAh6VlsClXLa-bdwDF3ihIc69-Kn_r4Bf05oLEyALrT7IM1c6AzYkFDZ80rzGnqrPiRm_aRFUVjfRmmMqE0kBr9LoZNZo-C_dZRrO6kh-q6OuC3AnCQvjnorrgc4T2twgMxwaQw"/>
+</div>
+</div>
+</header>
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="bg-surface-container-low h-screen w-72 fixed left-0 top-0 hidden md:flex flex-col border-r border-outline-variant py-md gap-base z-40">
+<div class="px-6 py-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h1 class="text-headline-md font-black text-primary">Adaptive CBC Learning</h1>
+<p class="text-label-sm text-on-surface-variant">Grade 4 Student</p>
+</div>
+</div>
+<nav class="flex-grow px-2 space-y-1">
+<a class="bg-secondary-container text-on-secondary-container font-bold rounded-xl mx-2 mb-1 flex items-center gap-3 px-4 py-3 translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-primary/10 rounded-xl mx-2 mb-1 flex items-center gap-3 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="import_contacts">import_contacts</span>
+<span class="text-label-md">Subjects</span>
+</a>
+<a class="text-on-surface-variant hover:bg-primary/10 rounded-xl mx-2 mb-1 flex items-center gap-3 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="text-label-md">Daily Practice</span>
+</a>
+<a class="text-on-surface-variant hover:bg-primary/10 rounded-xl mx-2 mb-1 flex items-center gap-3 px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="text-label-md">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pb-10 space-y-4">
+<button class="w-full bg-primary text-on-primary font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                Ask Adaptive CBC Learning
+            </button>
+<div class="pt-4 border-t border-outline-variant space-y-1">
+<a class="text-on-surface-variant hover:bg-primary/10 rounded-xl flex items-center gap-3 px-4 py-2 transition-all" href="#">
+<span class="material-symbols-outlined text-label-md" data-icon="settings">settings</span>
+<span class="text-label-md">Settings</span>
+</a>
+<a class="text-on-surface-variant hover:bg-primary/10 rounded-xl flex items-center gap-3 px-4 py-2 transition-all" href="#">
+<span class="material-symbols-outlined text-label-md" data-icon="help_outline">help_outline</span>
+<span class="text-label-md">Help</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 min-h-screen pb-32 md:pb-10 bg-pattern">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- Hero Section -->
+<section class="relative overflow-hidden rounded-3xl bg-primary-container text-on-primary-container p-8 md:p-12 mb-lg shadow-xl">
+<div class="relative z-10 max-w-2xl">
+<span class="inline-block px-4 py-1 rounded-full bg-white/20 text-label-md mb-4 backdrop-blur-sm">Grade 4 • Upper Primary</span>
+<h2 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile mb-4">Habari, Juma! 👋</h2>
+<p class="text-body-lg opacity-90 mb-8 max-w-lg">Ready to explore new skills today? You've already completed 4 lessons this week. Keep the streak alive!</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-tertiary-container text-on-tertiary-container font-bold px-8 py-4 rounded-xl shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                            Start Today's Quest
+                        </button>
+<button class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-8 py-4 rounded-xl hover:bg-white/20 transition-all">
+                            View Schedule
+                        </button>
+</div>
+</div>
+<!-- Abstract AI Decor -->
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-20 pointer-events-none hidden lg:block">
+<span class="material-symbols-outlined text-[200px] absolute -right-10 top-0" data-icon="model_training">model_training</span>
+</div>
+</section>
+<!-- Bento Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md">
+<!-- Daily Mastery (Left Column) -->
+<div class="lg:col-span-4 flex flex-col gap-md">
+<div class="bg-surface-container-lowest rounded-3xl p-md shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant/30 flex flex-col items-center text-center">
+<div class="flex justify-between w-full mb-6">
+<h3 class="text-headline-md text-on-surface">Daily Mastery</h3>
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+</div>
+<!-- Circular Progress -->
+<div class="relative w-48 h-48 flex items-center justify-center mb-6">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-container-high" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="138.23" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-headline-xl font-headline-xl text-on-surface">75%</span>
+<span class="text-label-sm text-outline uppercase tracking-widest">Mastered</span>
+</div>
+</div>
+<div class="w-full space-y-3">
+<div class="flex justify-between items-center p-3 bg-primary-fixed/20 rounded-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-bold">Exceeding Expectations</span>
+</div>
+<span class="text-primary font-black">12</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-surface-container rounded-xl">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="text-label-md">Meeting Expectations</span>
+</div>
+<span class="font-bold">24</span>
+</div>
+</div>
+</div>
+<!-- Quick Challenges -->
+<div class="bg-tertiary-fixed text-on-tertiary-fixed rounded-3xl p-md shadow-lg border border-tertiary-container/20">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-[32px]" data-icon="swords">swords</span>
+<h3 class="text-headline-md">Quick Challenges</h3>
+</div>
+<p class="text-body-md mb-6 opacity-90">Boost your score with 5-minute lightning rounds.</p>
+<button class="w-full bg-on-tertiary-fixed text-tertiary-fixed font-black py-4 rounded-xl flex items-center justify-center gap-2 hover:brightness-125 transition-all">
+                            Start Lightning Quiz
+                        </button>
+</div>
+</div>
+<!-- Continue Learning (Right Column) -->
+<div class="lg:col-span-8 flex flex-col gap-md">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-headline-md text-on-surface mb-1">Continue Learning</h3>
+<p class="text-body-md text-on-surface-variant">Pick up where you left off</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            All Subjects
+                            <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Subject Card 1 -->
+<div class="group bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant/30 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all">
+<div class="h-32 relative overflow-hidden">
+<img alt="Mathematics" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A clean and artistic visualization of mathematical concepts including geometric shapes, numbers, and algebraic equations floating in a soft, bright blue space. The style is modern, 3D, and educational, using the Adaptive CBC Learning brand colors to create a sense of intelligent exploration and academic precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMPC5-3oTyFs4ausJBPXwSyuOjzs4DhmiuN4CVPM4qaOmfGdZLIlV5WLoVG-CNBw0vWTbklWbshtG5S7UeWGk3Xw29igVlz7RrqmYlz1Llx8bXqkMcRjoYn714-d3Uv01R2VvMXomBX9OJc9OCZjS1iW3wuIBAQ9lq8crjMck1l7cPh8-YuBZ6FaRFmmLqyjKlOkvakXapXnn7vbr6CBxpfkHXwzr9wyxA3uRosDzZ9N1CpkeHwedvCOfMnh34lqaJmnrBKKuFmA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-3 left-4 flex items-center gap-2 text-white">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+<span class="text-label-md font-bold">Mathematics</span>
+</div>
+</div>
+<div class="p-5">
+<h4 class="text-body-lg font-bold text-on-surface mb-2">Multiplication of Fractions</h4>
+<p class="text-label-md text-on-surface-variant mb-6 line-clamp-1">Last activity: 2 hours ago</p>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm">
+<span>Progress</span>
+<span class="text-primary">80%</span>
+</div>
+<div class="h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[80%] rounded-full"></div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-primary text-white rounded-xl font-bold hover:brightness-110 transition-all">Resume Lesson</button>
+</div>
+</div>
+<!-- Subject Card 2 -->
+<div class="group bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant/30 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all">
+<div class="h-32 relative overflow-hidden">
+<img alt="Environmental Activities" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A vibrant and lush green forest landscape with dappled sunlight filtering through the leaves of tall trees. The scene is pristine and healthy, emphasizing conservation and environmental beauty. The aesthetic is bright, airy, and high-definition, reflecting the scholastic focus on sustainability and nature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMQbbGOmPFoYpXY1mr--6wDZN_6BWis5UzBWOpqxCE-ITxrrpVUHb1e1vpC888CfUhQbj4TXfUC1P13BfeBZRj4yfPFqwFSe06VB0Nj1W0Zy0kBM7DT3Yp42-KsSc2RTO1tQ3ApQUxp69T10AnsmSWuRuWN4OTLdap__wsXZBJG_w-fqMKr5aj2GO_jI-FycnzU9MJKoiPc5T9k9hfBROq_zG75IzCideD0l6c1cYs8abrlfFtuw_xtXNl8j7EUhTrd0opnt78PQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-3 left-4 flex items-center gap-2 text-white">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+<span class="text-label-md font-bold">Environmental Activities</span>
+</div>
+</div>
+<div class="p-5">
+<h4 class="text-body-lg font-bold text-on-surface mb-2">Soil Conservation Methods</h4>
+<p class="text-label-md text-on-surface-variant mb-6 line-clamp-1">Last activity: Yesterday</p>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm">
+<span>Progress</span>
+<span class="text-primary">45%</span>
+</div>
+<div class="h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%] rounded-full"></div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 border-2 border-primary text-primary rounded-xl font-bold hover:bg-primary/5 transition-all">Resume Lesson</button>
+</div>
+</div>
+</div>
+<!-- AI Guide Hint Component -->
+<div class="bg-secondary-container/30 border border-secondary-container rounded-3xl p-6 flex items-start gap-4">
+<div class="bg-secondary-container p-3 rounded-2xl">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h4 class="text-label-md font-black text-on-secondary-container uppercase tracking-widest mb-1">Adaptive CBC Learning's Tip</h4>
+<p class="text-body-md text-on-secondary-container opacity-90">"I noticed you're doing great in Math! Why not try a Science challenge next? It'll help you earn the 'Explorer' badge for this week."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe py-2 md:hidden bg-surface-container-lowest shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-xl border-t border-outline-variant/20">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1.5 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="text-label-sm">Subjects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-label-sm">Practice</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="text-label-sm">Analytics</span>
+</a>
+</nav>
+<!-- Contextual FAB -->
+<button class="fixed bottom-24 right-6 md:bottom-10 md:right-10 w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-[32px]" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+</body></html>

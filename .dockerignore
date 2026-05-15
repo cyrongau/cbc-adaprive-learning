@@ -1,0 +1,7 @@
+node_modules
+backend/dist
+frontend/.next
+ai-service/app/__pycache__
+.git
+.env
+*.log

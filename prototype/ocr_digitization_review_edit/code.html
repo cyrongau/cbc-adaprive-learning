@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adaptive CBC Learning Library | OCR Review &amp; Edit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#9af7af",
+                        "tertiary-container": "#c9a900",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-primary-fixed-variant": "#005227",
+                        "primary-container": "#268549",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#00210c",
+                        "tertiary-fixed": "#ffe16d",
+                        "outline-variant": "#becabd",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-secondary-fixed-variant": "#2d476f",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#705d00",
+                        "surface-tint": "#006d36",
+                        "on-tertiary-container": "#4c3f00",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-container": "#f6fff3",
+                        "inverse-primary": "#7eda95",
+                        "surface-container": "#eceef0",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary": "#455f88",
+                        "on-secondary-container": "#3f5882",
+                        "on-surface-variant": "#3f4940",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#221b00",
+                        "secondary-container": "#b6d0ff",
+                        "primary-fixed-dim": "#7eda95",
+                        "primary": "#006a34"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "label-sm": ["Nunito Sans"],
+                        "headline-xl": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-container-low/80 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm flex justify-between items-center px-gutter md:px-margin-desktop w-full h-16 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">arrow_back</span>
+<span class="font-headline-md text-primary dark:text-primary-fixed-dim font-extrabold">Adaptive CBC Learning Library</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<span class="text-on-surface-variant font-medium hover:bg-surface-container-high/50 transition-colors p-2 rounded-lg cursor-pointer">Home</span>
+<span class="text-primary font-bold border-b-2 border-primary pb-1 p-2 cursor-pointer">Library</span>
+<span class="text-on-surface-variant font-medium hover:bg-surface-container-high/50 transition-colors p-2 rounded-lg cursor-pointer">Search</span>
+</div>
+<div class="flex items-center gap-base">
+<div class="flex items-center bg-surface-container-high rounded-full px-4 py-1 gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-32 md:w-48" placeholder="Search resources..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high/50 p-2 rounded-full cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high/50 p-2 rounded-full cursor-pointer">account_circle</span>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant/30 w-64 hidden md:flex flex-col p-md gap-base">
+<div class="mb-lg">
+<h1 class="font-headline-md text-primary font-bold">CBC Library</h1>
+<p class="text-on-surface-variant font-label-md">Grade 1-9 Resources</p>
+</div>
+<nav class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm p-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl cursor-pointer transition-all active:translate-x-1">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md">Home</span>
+</div>
+<div class="flex items-center gap-sm p-3 bg-secondary-container text-on-secondary-container font-bold rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md">Past Papers</span>
+</div>
+<div class="flex items-center gap-sm p-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md">Revision Kits</span>
+</div>
+<div class="flex items-center gap-sm p-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-md">Mock Exams</span>
+</div>
+<div class="flex items-center gap-sm p-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">download</span>
+<span class="font-label-md">My Downloads</span>
+</div>
+</nav>
+<div class="mt-auto space-y-4">
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-xl shadow-sm hover:brightness-110 transition-all">Upgrade to Premium</button>
+<div class="border-t border-outline-variant/30 pt-4 flex flex-col gap-xs">
+<div class="flex items-center gap-sm p-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</div>
+<div class="flex items-center gap-sm p-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace: Split View -->
+<section class="flex-1 flex flex-col md:flex-row overflow-hidden bg-background">
+<!-- Left Pane: Original Scan Review -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/20 bg-surface-container-low/50">
+<div class="p-4 flex items-center justify-between bg-white border-b border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">image</span>
+<span class="font-label-md uppercase tracking-wider text-on-surface-variant">Original Scan</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors" title="Crop Selection">
+<span class="material-symbols-outlined">crop</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors" title="Re-scan Section">
+<span class="material-symbols-outlined">restart_alt</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors" title="Zoom In">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-auto p-md hide-scrollbar flex justify-center items-start">
+<div class="relative max-w-2xl w-full shadow-2xl rounded-lg bg-white overflow-hidden">
+<img alt="Scanned Exam Paper" class="w-full h-auto opacity-90" data-alt="A high-resolution overhead photograph of a handwritten Kenyan school exam paper on a clean white desk. The handwriting is in blue ink, featuring clear mathematical problems and diagrams. Soft, natural daylight iladaptive-cbc-learningtes the paper from the side, creating a professional yet realistic classroom atmosphere. The paper has slight natural texture and sharp contrast, fitting a high-end educational AI review interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmW8P8VBMV3VUp2SONiBe0xsbyLtRoXGUYYfFtV5i1oG5jHGgOwjttglvVdfU411kejzM07kBwpHForjGGxEm2L6-ggUfa0x92C-TbfE1YR3AwyuWYlfo49kSNdLBZrFqwhAku71zcdglmscv0mGhmQrjYkauDVN9UznI3y68Gw-isDo2j5j5sWPMofU0zQWuxz7JJB6BWvP9JbLGrp2Moa89qyMjKtK2MOGZ9qKquLW1tBTfTMiv2nCALfDhEBPpkWEXQbvOFwg"/>
+<!-- Highlighting Overlay simulation -->
+<div class="absolute top-[20%] left-[10%] w-[80%] h-12 bg-tertiary-fixed/30 border-2 border-tertiary rounded pointer-events-none"></div>
+<div class="absolute top-[45%] left-[10%] w-[30%] h-8 bg-error/10 border-2 border-error/40 rounded pointer-events-none"></div>
+</div>
+</div>
+</div>
+<!-- Right Pane: Editable Digitized Version -->
+<div class="flex-1 flex flex-col bg-white">
+<div class="p-4 flex items-center justify-between border-b border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-label-md uppercase tracking-wider text-on-surface-variant">Digitized Content</span>
+</div>
+<div class="flex items-center gap-2 text-primary font-bold text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        AI Sync Active
+                    </div>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-lg hide-scrollbar">
+<!-- Adaptive CBC Learning Guide Tip -->
+<div class="bg-secondary-container/20 p-md rounded-2xl border border-secondary-container/50 flex gap-4">
+<div class="bg-secondary-container p-2 rounded-xl h-fit">
+<span class="material-symbols-outlined text-on-secondary-container">auto_awesome</span>
+</div>
+<div>
+<p class="font-label-md text-on-secondary-container mb-1">Adaptive CBC Learning Assistant</p>
+<p class="text-body-md text-on-surface-variant">I've highlighted Question 2. The handwriting was a bit unclear—please verify the mathematical constants used.</p>
+</div>
+</div>
+<!-- Editable Section 1 -->
+<div class="space-y-base p-md border border-outline-variant/30 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-primary">Question 1</span>
+<span class="text-label-sm px-2 py-1 bg-primary/10 text-primary rounded-full">Validated</span>
+</div>
+<textarea class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-lg text-on-surface resize-none" rows="2">What is the capital city of Kenya, and what is its primary economic activity?</textarea>
+</div>
+<!-- Editable Section 2 (Highlighted for verification) -->
+<div class="space-y-base p-md border-2 border-tertiary-container rounded-xl bg-tertiary-container/5 shadow-md">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-tertiary">Question 2</span>
+<div class="flex items-center gap-1 text-tertiary font-bold text-label-sm">
+<span class="material-symbols-outlined text-sm">warning</span>
+                                Needs Review
+                            </div>
+</div>
+<textarea class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-lg text-on-surface font-bold resize-none" rows="3">Calculate the area of a circle with a radius of 14cm. (Take π = 22/7? or 3.14?)</textarea>
+<div class="flex gap-2 pt-2 border-t border-tertiary-container/20">
+<button class="text-label-sm font-bold text-tertiary hover:underline px-2">Verify against scan</button>
+<button class="text-label-sm font-bold text-primary hover:underline px-2">Mark as Correct</button>
+</div>
+</div>
+<!-- Editable Section 3 -->
+<div class="space-y-base p-md border border-outline-variant/30 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-primary">Question 3</span>
+</div>
+<textarea class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-lg text-on-surface resize-none" rows="2">Explain the importance of the Competency Based Curriculum (CBC) in developing life skills.</textarea>
+</div>
+<!-- Formatting Toolbar -->
+<div class="flex items-center gap-base p-2 bg-surface-container-high rounded-full w-fit mx-auto sticky bottom-4 shadow-lg border border-white">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors"><span class="material-symbols-outlined">format_bold</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors"><span class="material-symbols-outlined">format_italic</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors"><span class="material-symbols-outlined">format_list_numbered</span></button>
+<div class="w-px h-6 bg-outline-variant/50"></div>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors"><span class="material-symbols-outlined">add_circle</span></button>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-md bg-surface-container border-t border-outline-variant/30 flex flex-col sm:flex-row gap-md">
+<button class="flex-1 bg-secondary text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-md hover:brightness-110 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">quiz</span>
+                        Convert to Practice Quiz
+                    </button>
+<button class="flex-1 bg-primary text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-md hover:brightness-110 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">save</span>
+                        Save to Library
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-surface shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant/20 md:hidden z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:bg-surface-container-highest transition-all scale-95 active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm-mobile">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl p-2 transition-all scale-95 active:scale-90">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-sm text-label-sm-mobile">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:bg-surface-container-highest transition-all scale-95 active:scale-90">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm-mobile">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:bg-surface-container-highest transition-all scale-95 active:scale-90">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm-mobile">Profile</span>
+</div>
+</nav>
+</body></html>

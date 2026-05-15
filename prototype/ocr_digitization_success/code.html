@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#9af7af",
+                        "tertiary-container": "#c9a900",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-primary-fixed-variant": "#005227",
+                        "primary-container": "#268549",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#00210c",
+                        "tertiary-fixed": "#ffe16d",
+                        "outline-variant": "#becabd",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-secondary-fixed-variant": "#2d476f",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#705d00",
+                        "surface-tint": "#006d36",
+                        "on-tertiary-container": "#4c3f00",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-container": "#f6fff3",
+                        "inverse-primary": "#7eda95",
+                        "surface-container": "#eceef0",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary": "#455f88",
+                        "on-secondary-container": "#3f5882",
+                        "on-surface-variant": "#3f4940",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d8dadc",
+                        "outline": "#6f7a6f",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#221b00",
+                        "secondary-container": "#b6d0ff",
+                        "primary-fixed-dim": "#7eda95",
+                        "primary": "#006a34"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "label-sm": ["Nunito Sans"],
+                        "headline-xl": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .interactive-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-sm flex justify-between items-center px-gutter md:px-margin-desktop w-full h-16">
+<div class="flex items-center gap-base">
+<span class="font-headline-md text-primary font-extrabold">Adaptive CBC Learning Library</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high/50 p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high/50 p-2 rounded-full transition-colors" data-icon="account_circle">account_circle</button>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<div class="flex flex-col items-center text-center mb-xl">
+<div class="bg-primary-container/10 p-md rounded-full mb-base">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-xs">Digitization Complete</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[600px]">Adaptive CBC Learning has successfully processed your document and transformed it into an interactive CBC learning experience.</p>
+</div>
+<div class="bento-grid">
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md card-shadow">
+<div class="flex justify-between items-center mb-md border-b border-outline-variant/20 pb-base">
+<h2 class="font-headline-md text-headline-md text-on-surface">Interactive Quiz Preview</h2>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-sm py-xs rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+                        AI Generated
+                    </span>
+</div>
+<div class="space-y-md">
+<div class="p-md bg-surface-container-low border border-outline-variant/20 rounded-xl">
+<p class="font-label-md text-label-md text-secondary mb-xs">Question 1 of 15</p>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface mb-md">Based on the diagram extracted from your paper, which part of the plant is responsible for transporting water from roots to leaves?</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<label class="flex items-center gap-sm p-sm border border-outline rounded-lg cursor-pointer hover:bg-secondary-container/20 transition-all">
+<input class="w-6 h-6 text-primary focus:ring-primary border-outline-variant" name="q1" type="radio"/>
+<span class="font-body-md text-body-md">The Phloem</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline rounded-lg cursor-pointer hover:bg-secondary-container/20 transition-all">
+<input class="w-6 h-6 text-primary focus:ring-primary border-outline-variant" name="q1" type="radio"/>
+<span class="font-body-md text-body-md">The Xylem</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline rounded-lg cursor-pointer hover:bg-secondary-container/20 transition-all">
+<input class="w-6 h-6 text-primary focus:ring-primary border-outline-variant" name="q1" type="radio"/>
+<span class="font-body-md text-body-md">The Stomata</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline rounded-lg cursor-pointer hover:bg-secondary-container/20 transition-all">
+<input class="w-6 h-6 text-primary focus:ring-primary border-outline-variant" name="q1" type="radio"/>
+<span class="font-body-md text-body-md">The Petals</span>
+</label>
+</div>
+</div>
+<div class="bg-secondary-container/20 p-md rounded-xl border border-secondary/20 flex gap-base">
+<span class="material-symbols-outlined text-secondary" data-icon="lightbulb">lightbulb</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-secondary-container font-bold">Adaptive CBC Learning's Hint</h4>
+<p class="font-body-md text-body-md text-on-secondary-container/80">Remember the mnemonic: 'Xylem' sounds like 'high-lem'—it carries things up!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 space-y-md">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md card-shadow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Paper Summary</h2>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-sm bg-surface-container border border-outline-variant/10 rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="quiz">quiz</span>
+<span class="font-body-md text-body-md">Questions</span>
+</div>
+<span class="font-headline-md text-headline-md">15</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container border border-outline-variant/10 rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="subject">subject</span>
+<span class="font-body-md text-body-md">Subjects</span>
+</div>
+<span class="font-label-md text-label-md bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full">Science, Agriculture</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container border border-outline-variant/10 rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+<span class="font-body-md text-body-md">Difficulty</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">star</span>
+<span class="font-label-md text-label-md ml-xs">Intermediate</span>
+</div>
+</div>
+</div>
+<div class="mt-md">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">COMPETENCY TARGET</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 75%;"></div>
+</div>
+<div class="flex justify-between mt-xs">
+<span class="font-label-sm text-label-sm text-primary">Meeting Expectation</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Grade 7</span>
+</div>
+</div>
+</div>
+<div class="space-y-sm">
+<button class="w-full bg-primary text-on-primary font-headline-md text-headline-md py-md rounded-xl card-shadow interactive-hover flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+                        Start Practice Now
+                    </button>
+<button class="w-full bg-surface-container-lowest text-secondary border-2 border-secondary font-headline-md text-headline-md py-md rounded-xl card-shadow interactive-hover flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="calendar_add_on">calendar_add_on</span>
+                        Add to Study Plan
+                    </button>
+<button class="w-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label-md text-label-md py-md rounded-xl card-shadow interactive-hover flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                        Share with Classmates
+                    </button>
+</div>
+</div>
+</div>
+<section class="mt-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Visual Insights</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="relative rounded-xl overflow-hidden h-[240px] group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A clean, minimalist workspace with a tablet showing a bright educational interface with colorful diagrams and progress charts. The lighting is soft and natural, coming from a nearby window, creating an atmosphere of calm focus and modern learning. The surrounding environment includes a few neatly stacked books and a cup of tea, emphasizing a cozy yet productive scholastic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2h3M7eL87YWF6hhlIVbU4YZSHf5CXjI_OgVW3RT8zB5gZUa3DR8iOuSO-ItTR9Wh55UHVimPQG8VjSlDaABUOIHTWK6Zk_MeQ1jeXbl7JsViBCKolpb3MCoIzh9L6DdNv1p5qXuLvfd-Y42C_Ujwaj1PyEe3jhfJAVHI777xTqNjNc7a3NpuLaWkOb0MDkabRftNC6zTbF4KU_G73y0wbjaewnx0JRZg_MeGX58_8kziUYDeG7FrHhzYc23TmXsJng-goS3vRTg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-md">
+<p class="text-white font-label-md text-label-md">Extracted Diagram: Plant Anatomy Section 4.2</p>
+</div>
+</div>
+<div class="bg-tertiary-container/10 border border-tertiary-container/30 rounded-xl p-md flex flex-col justify-center">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-tertiary" data-icon="psychology">psychology</span>
+<h3 class="font-headline-md text-headline-md text-tertiary">Smart Recommendations</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Based on the extracted content, Adaptive CBC Learning suggests reviewing "Photosynthesis Basics" before starting the quiz to maximize your performance.</p>
+<a class="text-primary font-label-md text-label-md flex items-center gap-xs hover:underline" href="#">
+                        View recommended resources
+                        <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-surface shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant/20 md:hidden z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm-mobile">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl p-2">
+<span class="material-symbols-outlined" data-icon="menu_book" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-sm text-label-sm-mobile">Library</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm-mobile">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm-mobile">Profile</span>
+</div>
+</nav>
+<div class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low border-r border-outline-variant/30 flex-col p-md gap-base">
+<div class="flex flex-col gap-xs mb-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-sm">DASHBOARD</span>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-sm p-sm bg-secondary-container text-on-secondary-container font-bold rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="library_books" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-md text-label-md">Past Papers</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-md text-label-md">Revision Kits</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-md text-label-md">Mock Exams</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span class="font-label-md text-label-md">My Downloads</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant/20">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-sm rounded-xl mb-md">Upgrade to Premium</button>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</div>
+</body></html>

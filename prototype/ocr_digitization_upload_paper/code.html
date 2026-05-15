@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adaptive CBC Learning Library - OCR Paper Digitization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(10px);
+        }
+        .custom-dashed-border {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='24' ry='24' stroke='%23006A34' stroke-width='3' stroke-dasharray='12%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+            border-radius: 24px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#9af7af",
+                        "tertiary-container": "#c9a900",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-primary-fixed-variant": "#005227",
+                        "primary-container": "#268549",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#00210c",
+                        "tertiary-fixed": "#ffe16d",
+                        "outline-variant": "#becabd",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-secondary-fixed-variant": "#2d476f",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#705d00",
+                        "surface-tint": "#006d36",
+                        "on-tertiary-container": "#4c3f00",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-container": "#f6fff3",
+                        "inverse-primary": "#7eda95",
+                        "surface-container": "#eceef0",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary": "#455f88",
+                        "on-secondary-container": "#3f5882",
+                        "on-surface-variant": "#3f4940",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d8dadc",
+                        "outline": "#6f7a6f",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#221b00",
+                        "secondary-container": "#b6d0ff",
+                        "primary-fixed-dim": "#7eda95",
+                        "primary": "#006a34"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "label-sm": ["Nunito Sans"],
+                        "headline-xl": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="bg-surface-container-low border-r border-outline-variant/30 w-64 hidden md:flex flex-col sticky top-0 h-screen p-md gap-base">
+<div class="flex items-center gap-sm mb-lg">
+<div class="bg-primary-container p-xs rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h1 class="font-headline-md text-primary font-bold">CBC Library</h1>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base bg-secondary-container text-on-secondary-container font-bold rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-md text-label-md">Past Papers</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Revision Kits</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-md text-label-md">Mock Exams</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">download</span>
+<span class="font-label-md text-label-md">My Downloads</span>
+</a>
+</nav>
+<div class="mt-auto space-y-xs pt-lg border-t border-outline-variant/30">
+<div class="bg-primary p-md rounded-xl text-on-primary mb-md shadow-sm">
+<p class="font-label-md mb-xs opacity-90">Ready for more?</p>
+<p class="font-headline-md text-[18px] mb-base leading-tight">Upgrade to Premium</p>
+<button class="w-full bg-tertiary-fixed text-on-tertiary-fixed font-bold py-xs rounded-lg text-label-md hover:scale-105 transition-transform">Get Access</button>
+</div>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+<!-- TopNavBar -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 flex justify-between items-center px-gutter md:px-margin-desktop w-full h-16 shadow-sm">
+<div class="flex items-center gap-sm">
+<span class="md:hidden material-symbols-outlined text-primary">menu</span>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md font-extrabold text-primary">Adaptive CBC Learning Library</h2>
+</div>
+<div class="flex items-center gap-base">
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-md py-xs border border-outline-variant/20 focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-64" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="p-gutter md:p-margin-desktop max-w-[1200px] mx-auto w-full pb-32 md:pb-margin-desktop">
+<!-- Page Header -->
+<div class="mb-lg">
+<h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-base">Digitize Your Papers</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Adaptive CBC Learning uses AI to turn your photos into interactive revision sets. Upload your exam papers to get instant answers and explanations.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left: Upload Area (Bento Main) -->
+<div class="lg:col-span-2 space-y-lg">
+<section class="bg-surface-container-lowest custom-dashed-border p-xl flex flex-col items-center text-center hover:bg-primary-container/5 transition-all group cursor-pointer">
+<div class="bg-primary-container/10 p-lg rounded-full mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[64px] text-primary" style="font-variation-settings: 'FILL' 0, 'wght' 300;">cloud_upload</span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-xs">Drag and drop files here</h3>
+<p class="font-body-md text-on-surface-variant mb-lg">Support for JPG, PNG, and PDF up to 20MB</p>
+<button class="bg-primary text-on-primary font-bold px-lg py-sm rounded-xl text-label-md shadow-md active:scale-95 transition-all">Browse Files</button>
+</section>
+<!-- Scan Quality Instructions -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-base">
+<div class="bg-surface-container-low p-md rounded-2xl flex items-start gap-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
+<div>
+<h4 class="font-label-md text-on-surface mb-xs">Good Lighting</h4>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Ensure the page is evenly lit without harsh shadows or glare.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-2xl flex items-start gap-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">align_center</span>
+<div>
+<h4 class="font-label-md text-on-surface mb-xs">Stay Flat</h4>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Smooth out any creases and keep the paper perfectly flat.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-2xl flex items-start gap-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">crop_free</span>
+<div>
+<h4 class="font-label-md text-on-surface mb-xs">Full Frame</h4>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Keep all four corners of the page visible within the camera frame.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Sidebar: Mobile & Stats -->
+<div class="space-y-lg">
+<!-- Mobile Sync QR -->
+<section class="bg-surface-container-highest p-lg rounded-3xl border border-outline-variant/30 flex flex-col items-center text-center">
+<div class="bg-surface-container-lowest p-md rounded-2xl shadow-sm mb-md">
+<div class="w-32 h-32 bg-white flex items-center justify-center relative overflow-hidden rounded-lg">
+<!-- QR Code Placeholder Representation -->
+<div class="grid grid-cols-4 grid-rows-4 gap-xs w-24 h-24">
+<div class="bg-on-surface"></div><div class="bg-on-surface"></div><div class="bg-transparent"></div><div class="bg-on-surface"></div>
+<div class="bg-on-surface"></div><div class="bg-transparent"></div><div class="bg-on-surface"></div><div class="bg-on-surface"></div>
+<div class="bg-transparent"></div><div class="bg-on-surface"></div><div class="bg-on-surface"></div><div class="bg-transparent"></div>
+<div class="bg-on-surface"></div><div class="bg-on-surface"></div><div class="bg-transparent"></div><div class="bg-on-surface"></div>
+</div>
+</div>
+</div>
+<h3 class="font-label-md text-on-surface text-[18px] mb-xs">Capture with Mobile</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-md leading-snug">Scan this QR code with your phone camera to take photos directly.</p>
+<div class="flex items-center gap-xs text-primary font-bold text-label-md bg-primary/10 px-md py-xs rounded-full">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>Connected</span>
+</div>
+</section>
+<!-- Adaptive CBC Learning Assistant Card -->
+<section class="bg-secondary-container/30 p-lg rounded-3xl border border-secondary-container/50 relative overflow-hidden">
+<div class="flex items-start gap-sm relative z-10">
+<div class="bg-secondary text-on-secondary p-xs rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-secondary-container">Adaptive CBC Learning Guide</h4>
+<p class="text-[14px] text-on-secondary-container/80 mt-xs leading-relaxed italic">"I'll automatically categorize your paper into Grade, Subject, and Chapter once it's uploaded!"</p>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 text-secondary/10">
+<span class="material-symbols-outlined text-[100px]">auto_awesome</span>
+</div>
+</section>
+</div>
+<!-- Recent Activity (Asymmetric Bento Bottom) -->
+<div class="lg:col-span-3 space-y-base">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-md text-on-surface">Recently Digitized</h3>
+<button class="text-primary font-bold text-label-md hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-base">
+<!-- Paper Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant/20 hover:-translate-y-1 transition-transform group">
+<div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover" data-alt="A clean, flat-lay photograph of a Kenyan CBC Grade 7 Science exam paper resting on a light wooden table. The lighting is soft and even, highlighting the clear text and diagrams of the paper. The background is a minimalist, modern educational setting with a green plant leaf peeking in the corner, evoking a fresh and focused academic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Hjq23VMwO8Q0IGN3FT93C2wiEEE1Tc7KmiytG9LqMivVlSOdp8pXJbiUzd7SiWQdCd4ocBTZX7GcfdopO41pcqSu-m172i_M8VlrVNpXDLKmDLD4AqcUk1vPkiaUHGNxuMtM2OJ_HRe-TFesdkeQw7N68ovRr7Egw5PNGjHvQGlYdW_lA0dkAWFNd_vl2W9PzhInmOloIFn8yiq8fd5s5pJCcJ6vBnR1XPxVW8a1FOA3ECtOd5-rX-vgjWSNQNWXms3_HZRBzA"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-on-primary font-bold px-md py-xs rounded-lg text-label-sm">Open Paper</button>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-on-surface line-clamp-1">Mid-Term Math Grade 4</h4>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Analyzed 2h ago</p>
+<div class="pt-sm border-t border-outline-variant/10">
+<div class="flex justify-between text-[11px] font-bold text-on-surface-variant mb-xs">
+<span>AI Analysis</span>
+<span>100%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Paper Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant/20 hover:-translate-y-1 transition-transform group">
+<div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-sm relative">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of an English composition exercise page with handwritten notes and corrections. The lighting is bright and airy, typical of a modern study space. The document is perfectly flat, showing various grammar exercises and a colorful progress sticker at the top right. The aesthetic is scholastic and clean, with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw-i8OvTc7-JRRcl0Jt-7gGPFtlnwtB17aaMwv_b0xVEK5oDAbZmruldeczc_fOjW8iSf8E1AtlzaCq1cpEboeRY5iLoCy4r7Twf9QoypPOvcGTQCMC8UjKN4BBOhnPzos3FaQxyMmyH0m1SRGumXjxdlalb1H94eoORUxsw6CCgkEdWWg9v3eTKRSpXy7_XemOfwfG0p8pMIn6MmD5Xigh2U8ouy2IrdaDLzlp8IwpF7LZN94CTCYXuu3FXH7hKg7EeC4YmkANw"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-on-primary font-bold px-md py-xs rounded-lg text-label-sm">Open Paper</button>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-on-surface line-clamp-1">English Creative Writing</h4>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Analyzed Yesterday</p>
+<div class="pt-sm border-t border-outline-variant/10">
+<div class="flex justify-between text-[11px] font-bold text-on-surface-variant mb-xs">
+<span>AI Analysis</span>
+<span>100%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Paper Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant/20 hover:-translate-y-1 transition-transform group opacity-80">
+<div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-sm relative bg-surface-container flex items-center justify-center">
+<div class="flex flex-col items-center gap-base">
+<div class="animate-pulse flex items-center gap-xs">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+<div class="w-2 h-2 bg-primary rounded-full" style="animation-delay: 0.2s"></div>
+<div class="w-2 h-2 bg-primary rounded-full" style="animation-delay: 0.4s"></div>
+</div>
+<span class="text-label-sm font-bold text-primary">Processing OCR...</span>
+</div>
+</div>
+<div class="space-y-xs">
+<h4 class="font-label-md text-on-surface line-clamp-1">Kiswahili Grade 6 Quiz</h4>
+<p class="text-label-sm text-on-surface-variant">Uploading...</p>
+<div class="pt-sm border-t border-outline-variant/10">
+<div class="flex justify-between text-[11px] font-bold text-on-surface-variant mb-xs">
+<span>Scanning Text</span>
+<span>45%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add New Prompt -->
+<div class="bg-surface-container p-md rounded-2xl border-2 border-dashed border-outline-variant/50 flex flex-col items-center justify-center text-center hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-background flex items-center justify-center mb-base group-hover:scale-110 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Digitize New Paper</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 pb-safe bg-surface shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant/20 md:hidden z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 scale-95 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm-mobile">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl p-2 scale-95 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-sm text-label-sm-mobile">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 scale-95 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm-mobile">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 scale-95 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm-mobile">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

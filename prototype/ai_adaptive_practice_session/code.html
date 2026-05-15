@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adaptive CBC Learning | Adaptive Practice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#006a34",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d8dadc",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-fixed": "#00210c",
+                        "background": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#c9a900",
+                        "secondary-fixed": "#d6e3ff",
+                        "secondary-container": "#b6d0ff",
+                        "on-surface-variant": "#3f4940",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-primary-container": "#f6fff3",
+                        "on-background": "#191c1e",
+                        "inverse-primary": "#7eda95",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#268549",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#becabd",
+                        "outline": "#6f7a6f",
+                        "on-primary-fixed-variant": "#005227",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed": "#ffe16d",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eceef0",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "tertiary": "#705d00",
+                        "on-tertiary-container": "#4c3f00",
+                        "inverse-surface": "#2d3133",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#455f88",
+                        "primary-fixed-dim": "#7eda95",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-tint": "#006d36",
+                        "on-secondary-container": "#3f5882",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#9af7af",
+                        "on-secondary-fixed-variant": "#2d476f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"],
+                        "label-md": ["Nunito Sans"],
+                        "headline-xl": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Nunito Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary/20">
+<!-- TopAppBar (Transactional Variant: Suppressed main nav, focus on practice) -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm docked full-width top-0 sticky flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 z-50">
+<div class="flex items-center gap-base">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+<span class="text-headline-md-mobile font-headline-md-mobile font-extrabold text-primary dark:text-primary-fixed tracking-tight">Adaptive CBC Learning</span>
+</div>
+<!-- Practice Progress Bar -->
+<div class="hidden md:flex flex-col items-center flex-1 max-w-md px-lg">
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-700" style="width: 65%;"></div>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant mt-2">Question 13 of 20</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-xs px-3 py-1.5 bg-tertiary-container/10 border border-tertiary-container/30 rounded-full">
+<span class="material-symbols-outlined text-tertiary-container text-[20px]" data-icon="emoji_events" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<span class="text-label-md font-label-md text-on-tertiary-container">1,240</span>
+</div>
+<img alt="Student avatar" class="w-10 h-10 rounded-full border-2 border-primary/20 object-cover" data-alt="A friendly, high-quality portrait of a young Grade 4 student with a bright smile, wearing a neat school sweater. The background is a soft-focus classroom setting with warm, natural sunlight streaming through a window, creating a supportive and encouraging academic atmosphere consistent with a professional educational app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhSPjF0yxosXhG10O76u5nK-05fB5pS3BG6UNMnMMISE5QdApMF4jSbpSHBuEyhRInVW21bvfi3LD0OPU67GRl2JX1wSWt_U2LzRrOb7edIhNW8i2VCy_i017USMEBHEeI3WMoYhWLH84gx0mlpxVF6GTUz8TWc2w7p2Sc1Tk5wq52h7nMX4tEwqJnHHgMZMMCjkmM58IF-x-95iiQubqvyu8KBUpoyC9wWqSlYyJF-Cox7T_3ueulOB-K2tlqlfDkx7xr2FXjUw"/>
+</div>
+</header>
+<!-- Mobile Progress Bar -->
+<div class="md:hidden w-full h-1 bg-surface-container">
+<div class="h-full bg-primary transition-all duration-700" style="width: 65%;"></div>
+</div>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg flex flex-col items-center">
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Side: Question Canvas -->
+<div class="lg:col-span-8 flex flex-col gap-md">
+<!-- Question Card -->
+<div class="bg-surface-container-lowest dark:bg-surface-dim rounded-xl p-md md:p-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<div class="flex items-center gap-base mb-md">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-label-sm font-label-sm rounded-full">Mathematics</span>
+<span class="text-label-sm font-label-sm text-outline">Grade 4 • Topic 3</span>
+</div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-xl leading-snug">
+                        Sarah has 15 apples. She gives 3 apples each to her 4 friends. How many apples does Sarah have left?
+                    </h2>
+<!-- Question Image (Illustrative) -->
+<div class="w-full aspect-video rounded-xl overflow-hidden mb-xl bg-surface-container-low flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A playful and clear 3D digital illustration of bright red apples arranged in groups on a clean, light blue wooden tabletop. The lighting is soft and cheerful, mimicking a bright morning. The composition is simple and academic, designed to help a young student visualize a subtraction word problem in a friendly, distraction-free environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBr98Mgapfzd1WzXW_CWlLXDx6RReNBVu5FMyPuagCTUiCz3Iik-GPVKv97oTSiniSrHHyRl4MMkIHDWqO8Wqcd-xTFXGwskX5JWCiPvpEh3mlgEQp8eipCcpJXZT_zt2T9frDe0VQXAfL0CenePAFOna2F5UH7T3WFpbbSgPCbWegHJ9hM3yjzBy8Xx8b32_eJ6SjD4VjwIBshvCp2zHcXmImEksTlrr6LGz7hoH6_ynKAnIcxByYC77TsP1PSpVSXTf6-PBkIQ"/>
+</div>
+<!-- Multiple Choice Area -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-base">
+<button class="group flex items-center p-md border-2 border-outline-variant/50 rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high group-hover:bg-primary group-hover:text-white text-label-md font-label-md transition-colors mr-md">A</span>
+<span class="text-body-lg font-body-lg text-on-surface">3 apples</span>
+</button>
+<button class="group flex items-center p-md border-2 border-primary bg-primary/5 rounded-xl transition-all text-left relative overflow-hidden">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white text-label-md font-label-md transition-colors mr-md">B</span>
+<span class="text-body-lg font-body-lg text-on-surface">12 apples</span>
+<!-- Selected Indicator -->
+<div class="absolute right-4 top-1/2 -translate-y-1/2">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<button class="group flex items-center p-md border-2 border-outline-variant/50 rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high group-hover:bg-primary group-hover:text-white text-label-md font-label-md transition-colors mr-md">C</span>
+<span class="text-body-lg font-body-lg text-on-surface">7 apples</span>
+</button>
+<button class="group flex items-center p-md border-2 border-outline-variant/50 rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high group-hover:bg-primary group-hover:text-white text-label-md font-label-md transition-colors mr-md">D</span>
+<span class="text-body-lg font-body-lg text-on-surface">2 apples</span>
+</button>
+</div>
+</div>
+<!-- Confidence Check Section (Post-selection) -->
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-md">
+<div class="flex items-center gap-md">
+<div class="p-2 bg-secondary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="psychology">psychology</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface">How sure are you about this answer?</p>
+</div>
+<div class="flex gap-xs">
+<button class="px-4 py-2 rounded-full border border-outline-variant text-label-sm font-label-sm hover:bg-surface-container-high transition-colors">Guessing</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-label-sm font-label-sm hover:bg-surface-container-high transition-colors">Not Sure</button>
+<button class="px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container text-label-sm font-label-sm hover:brightness-95 transition-colors">Confident</button>
+</div>
+</div>
+<!-- Submit Action -->
+<div class="flex justify-end gap-md pt-base">
+<button class="px-lg h-14 rounded-full border-2 border-secondary text-secondary font-bold hover:bg-secondary/5 transition-all active:scale-95">
+                        Save for Later
+                    </button>
+<button class="px-xl h-14 rounded-full bg-primary text-white font-bold shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all active:scale-95">
+                        Check Answer
+                    </button>
+</div>
+</div>
+<!-- Right Side: AI Companion & Resources -->
+<aside class="lg:col-span-4 flex flex-col gap-lg">
+<!-- Adaptive CBC Learning Assistant Card -->
+<div class="bg-secondary-container/10 border border-secondary-container/30 rounded-2xl p-md flex flex-col gap-base relative overflow-hidden">
+<div class="absolute -top-4 -right-4 w-24 h-24 bg-secondary-container/20 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-sm z-10">
+<div class="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center text-white shadow-md">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Adaptive CBC Learning Assistant</h3>
+<p class="text-label-sm font-label-sm text-secondary">Ready to help!</p>
+</div>
+</div>
+<div class="bg-white/60 dark:bg-surface-dim/40 backdrop-blur-sm p-md rounded-xl border border-white/80 dark:border-white/10 z-10">
+<p class="text-body-md font-body-md text-on-surface-variant italic">
+                            "Hi! Trying to figure out how many apples are left? Start by calculating how many apples Sarah gave away in total. Multiplication might help!"
+                        </p>
+</div>
+<button class="w-full py-3 bg-secondary text-white rounded-xl font-bold flex items-center justify-center gap-xs hover:bg-secondary/90 transition-all active:scale-[0.98] z-10">
+<span class="material-symbols-outlined text-[18px]" data-icon="lightbulb">lightbulb</span>
+                        Ask Adaptive CBC Learning for a Hint
+                    </button>
+</div>
+<!-- Gamified Progress / Streak -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-md shadow-sm">
+<h4 class="text-label-md font-label-md text-on-surface-variant mb-md uppercase">Your Progress</h4>
+<div class="flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-body-md font-body-md font-bold">5 Day Streak</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Keep it up!</span>
+</div>
+<div class="grid grid-cols-5 gap-xs">
+<div class="h-1.5 bg-primary rounded-full"></div>
+<div class="h-1.5 bg-primary rounded-full"></div>
+<div class="h-1.5 bg-primary rounded-full"></div>
+<div class="h-1.5 bg-surface-container-high rounded-full"></div>
+<div class="h-1.5 bg-surface-container-high rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Support/Reference -->
+<div class="bg-surface-container rounded-2xl p-md border border-dashed border-outline-variant">
+<h4 class="text-label-md font-label-md text-on-surface-variant mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="menu_book">menu_book</span>
+                        Quick Reference
+                    </h4>
+<ul class="flex flex-col gap-base">
+<li class="group flex items-center justify-between p-2 rounded-lg hover:bg-white/50 transition-colors cursor-pointer">
+<span class="text-body-md font-body-md text-on-surface">Subtraction Guide</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</li>
+<li class="group flex items-center justify-between p-2 rounded-lg hover:bg-white/50 transition-colors cursor-pointer">
+<span class="text-body-md font-body-md text-on-surface">Multiplication Table</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary" data-icon="chevron_right">chevron_right</span>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+</main>
+<!-- Success Feedback Overlay (Hidden by default, used for state simulation) -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-margin-mobile">
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"></div>
+<div class="relative bg-white rounded-3xl p-xl max-w-md w-full shadow-2xl text-center flex flex-col items-center gap-md">
+<div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center text-white text-5xl animate-bounce">
+<span class="material-symbols-outlined text-5xl" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">Exceeding Expectations!</h3>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-xs">You've mastered word problems involving subtraction and multiplication.</p>
+</div>
+<div class="flex items-center gap-base p-md bg-tertiary-container/10 rounded-2xl w-full">
+<span class="material-symbols-outlined text-tertiary-container text-4xl" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+<div class="text-left">
+<span class="block text-label-md font-label-md text-on-tertiary-container uppercase">Earned Reward</span>
+<span class="text-headline-md font-headline-md text-on-tertiary-container">+50 Practice Points</span>
+</div>
+</div>
+<button class="w-full h-14 bg-primary text-white rounded-full font-bold shadow-lg hover:brightness-110 transition-all">
+                Next Question
+            </button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adaptive CBC Learning - Course Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e0e3e5",
+                    "primary": "#006a34",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d8dadc",
+                    "on-surface": "#191c1e",
+                    "tertiary-container": "#c9a900",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary-fixed": "#00210c",
+                    "background": "#f7f9fb",
+                    "secondary-fixed": "#d6e3ff",
+                    "secondary-container": "#b6d0ff",
+                    "on-surface-variant": "#3f4940",
+                    "on-background": "#191c1e",
+                    "on-primary-container": "#f6fff3",
+                    "surface-bright": "#f7f9fb",
+                    "inverse-primary": "#7eda95",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#e9c400",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#268549",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#544600",
+                    "outline-variant": "#becabd",
+                    "outline": "#6f7a6f",
+                    "on-primary-fixed-variant": "#005227",
+                    "on-tertiary-fixed": "#221b00",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e6e8ea",
+                    "tertiary-fixed": "#ffe16d",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "secondary-fixed-dim": "#adc7f7",
+                    "tertiary": "#705d00",
+                    "on-tertiary-container": "#4c3f00",
+                    "secondary": "#455f88",
+                    "inverse-surface": "#2d3133",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed-dim": "#7eda95",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#3f5882",
+                    "surface-tint": "#006d36",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#9af7af",
+                    "on-secondary-fixed-variant": "#2d476f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "margin-desktop": "48px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "label-sm": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-xl-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #becabd;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TopAppBar Navigation -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm docked full-width top-0 sticky flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 z-50">
+<div class="flex items-center gap-base">
+<span class="text-headline-md-mobile font-headline-md-mobile font-extrabold text-primary dark:text-primary-fixed tracking-tight">Adaptive CBC Learning</span>
+</div>
+<div class="hidden md:flex items-center gap-md">
+<a class="text-on-surface-variant dark:text-outline text-label-md font-label-md hover:bg-surface-container-high/50 transition-colors px-3 py-2 rounded-lg" href="#">Home</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary text-label-md font-label-md px-3 py-2" href="#">Subjects</a>
+<a class="text-on-surface-variant dark:text-outline text-label-md font-label-md hover:bg-surface-container-high/50 transition-colors px-3 py-2 rounded-lg" href="#">Practice</a>
+<a class="text-on-surface-variant dark:text-outline text-label-md font-label-md hover:bg-surface-container-high/50 transition-colors px-3 py-2 rounded-lg" href="#">Analytics</a>
+</div>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-on-surface-variant p-2 rounded-full hover:bg-surface-container-high/50 transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant p-2 rounded-full hover:bg-surface-container-high/50 transition-colors">emoji_events</button>
+<div class="h-8 w-8 rounded-full bg-primary-container overflow-hidden ml-2 border border-outline-variant">
+<img alt="Student avatar" data-alt="A portrait of a cheerful African elementary school student wearing a neat school uniform, smiling brightly in a sunny outdoor classroom setting. The lighting is warm and natural, creating a hopeful and academic atmosphere consistent with a premium education app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJLumDZSkVXuKb8ON6O_0DmmkrbmvXEt1YhJ0e51MLeqtfYbDZDuxvX1aEY_Y4Gg6gzTxlGpbqChYAIAi5wgsFkZ89lDBwC6cm4uH5UlRYBbAJYZAQEYAXqziqtVFn4H1LWCj9HhLBcuYjv-dfu98zPTyNgX1Ys4fuz-T9gZ8dn4j4CT1L-bxU8E_DJ1ut314Kw2kE3rMRAf4Go8Y5ZxECcENphB4wPDijBR4YTm-HXs5k2C6fEIH94TG5wbO0p3l2dlg0t7-xTQ"/>
+</div>
+</div>
+</nav>
+<!-- Sidebar (Desktop Only) -->
+<aside class="h-screen w-72 fixed left-0 top-0 hidden md:flex flex-col bg-surface-container-low dark:bg-surface-container-highest border-r border-outline-variant z-40 pt-20 custom-scrollbar overflow-y-auto">
+<div class="px-md py-base">
+<div class="flex items-center gap-sm mb-lg">
+<div class="h-10 w-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<h2 class="text-label-md font-label-md font-black text-primary">Adaptive CBC Learning</h2>
+<p class="text-[11px] text-on-surface-variant">Grade 4 Student</p>
+</div>
+</div>
+<!-- Filters Section -->
+<div class="space-y-md">
+<div>
+<h3 class="text-label-sm font-label-sm text-outline mb-base uppercase tracking-widest">Grade</h3>
+<select class="w-full bg-surface-container border border-outline-variant rounded-xl p-3 text-label-md outline-none focus:ring-2 focus:ring-primary/20">
+<option>Grade 1 - 3</option>
+<option selected="">Grade 4 (CBC)</option>
+<option>Grade 5 - 6</option>
+<option>Grade 7 - 9</option>
+</select>
+</div>
+<div>
+<h3 class="text-label-sm font-label-sm text-outline mb-base uppercase tracking-widest">Level</h3>
+<div class="space-y-xs">
+<label class="flex items-center gap-sm p-2 hover:bg-primary/5 rounded-lg cursor-pointer transition-all">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-label-md font-label-md text-on-surface-variant">Beginner</span>
+</label>
+<label class="flex items-center gap-sm p-2 hover:bg-primary/5 rounded-lg cursor-pointer transition-all">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-label-md font-label-md text-on-surface-variant">Intermediate</span>
+</label>
+<label class="flex items-center gap-sm p-2 hover:bg-primary/5 rounded-lg cursor-pointer transition-all">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-label-md font-label-md text-on-surface-variant">Advanced</span>
+</label>
+</div>
+</div>
+<!-- Shortcuts -->
+<div class="pt-base">
+<h3 class="text-label-sm font-label-sm text-outline mb-base uppercase tracking-widest">Shortcuts</h3>
+<a class="flex items-center gap-sm p-2 text-on-surface-variant hover:bg-primary/10 rounded-xl transition-all mb-1" href="#">
+<span class="material-symbols-outlined text-[20px]">import_contacts</span>
+<span class="text-label-md font-label-md">My Courses</span>
+</a>
+<a class="flex items-center gap-sm p-2 text-on-surface-variant hover:bg-primary/10 rounded-xl transition-all mb-1" href="#">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+<span class="text-label-md font-label-md">Favorite Subjects</span>
+</a>
+</div>
+<!-- Recent Items -->
+<div class="pt-base">
+<h3 class="text-label-sm font-label-sm text-outline mb-base uppercase tracking-widest">Recently Viewed</h3>
+<div class="space-y-sm">
+<div class="flex items-center gap-sm group cursor-pointer">
+<div class="w-10 h-10 bg-surface-container-high rounded-lg overflow-hidden border border-outline-variant">
+<img alt="Science course" data-alt="A stylized 3D rendered scientific model of a molecule with glowing connections, presented on a clean, professional white background. The lighting is soft and high-key, using Adaptive CBC Learning's signature scholastic blue and green accents to evoke a sense of advanced digital learning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCym-TOjHF2-7OkjLXq8_tnJ2KtA-WbrWUEIhLROVqTpKM2tXpUXbpYhuFF-Yy1SGUGVNLBdWWzFXrx22IB1FHeGt9vj2CpvMtU1ArGl3J-c3Z7FtzYd1KIwq4vrZe4ClObbz0NFTl4pndxPPXI4Gr_Q1t-UOpdH_w-4ZTT6vPnqhAQc0SWnitZYycDSwz8UnIPOakSdLeV-BNxVZN4RKk3oXIe852SRKCDVWMInHs_lLfD7uViBKvwJsgecyhANm7NrTB6M_iL-Q"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-label-md text-on-surface truncate">Human Anatomy 101</p>
+<p class="text-[11px] text-outline">2 hours ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Premium Banner -->
+<div class="bg-gradient-to-br from-primary to-primary-container p-md rounded-2xl text-on-primary-container shadow-lg relative overflow-hidden mt-md">
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-[80px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<p class="text-label-sm font-bold uppercase mb-xs opacity-90">Unlock Mastery</p>
+<p class="text-headline-md font-headline-md mb-md leading-tight">Join Premium for 1-on-1 Tutoring</p>
+<button class="w-full bg-white text-primary font-bold py-2 rounded-xl text-label-md hover:scale-[1.02] transition-transform">Get Started</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-72 min-h-screen pt-4 pb-20 md:pb-10">
+<!-- Hero Search Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-md">
+<div class="bg-white rounded-3xl p-lg shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/10 text-[200px]" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+<div class="relative z-10 max-w-2xl">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-sm">Master the CBC Curriculum</h1>
+<p class="text-body-lg text-on-surface-variant mb-lg">Explore over 500+ interactive courses tailored for Grade 1-9 students in Kenya.</p>
+<div class="flex flex-col md:flex-row gap-base">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 h-14 rounded-2xl border-outline-variant border bg-surface text-body-md focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Search courses, subjects, or topics..." type="text"/>
+</div>
+<button class="h-14 px-8 bg-primary text-white font-bold rounded-2xl hover:bg-primary-container transition-colors shadow-lg flex items-center justify-center gap-base">
+                            Search Courses
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Pills & View Toggle -->
+<section class="px-margin-mobile md:px-margin-desktop mb-md flex flex-col md:flex-row justify-between items-start md:items-center gap-base">
+<div class="flex gap-sm overflow-x-auto pb-2 w-full md:w-auto no-scrollbar">
+<button class="px-6 py-2 bg-primary text-white rounded-full font-bold whitespace-nowrap">All</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold whitespace-nowrap hover:bg-surface-variant transition-colors">Trending</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold whitespace-nowrap hover:bg-surface-variant transition-colors">Mathematics</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold whitespace-nowrap hover:bg-surface-variant transition-colors">Science</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold whitespace-nowrap hover:bg-surface-variant transition-colors">English</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold whitespace-nowrap hover:bg-surface-variant transition-colors">New Releases</button>
+</div>
+<div class="hidden md:flex gap-base bg-surface-container-high p-1 rounded-xl">
+<button class="p-2 bg-white text-primary rounded-lg shadow-sm">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined">view_list</span>
+</button>
+</div>
+</section>
+<!-- Course Grid -->
+<section class="px-margin-mobile md:px-margin-desktop grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Course Card 1 -->
+<div class="group bg-white rounded-2xl border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
+<div class="relative aspect-video rounded-t-2xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A bright, cheerful 3D illustration of geometric shapes like cubes and pyramids floating in a clean, digital environment. The colors are vibrant primary greens and blues, with a high-key lighting setup that feels academic and inspiring for a student using Adaptive CBC Learning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxmrp1ggqsp4CZ6N8OpZoWHJAxL9SfcrjOHV1wfcf1hZ1zfMMo4xtJqzBXT5YC6N4yid1U8GSHBUXIWgpFfPVyP2KNvXX07Ov-so7dbNGtpGsb2FqHbrw8VEtNRXRtFv8cRi7zdQyDPBKcgBI1j7XhPnDh62Iog0cER5k5V7JZT-L5r0S75eHnJyAYZk4Ojk-hIf3rneVbEUH0O1CRPm4yJS8TbCuKVy1liH1Wtcd5KuZPK8SwvnXerAizsCqcXkw7Oq8L58gypw"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-label-sm font-bold text-primary">FREE</div>
+<div class="absolute bottom-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">4.9</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex items-center gap-xs text-outline mb-xs">
+<span class="material-symbols-outlined text-[16px]">school</span>
+<span class="text-label-sm uppercase tracking-wide">Grade 4 • Mathematics</span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-base line-clamp-1">Division &amp; Logic Foundations</h3>
+<p class="text-body-md text-on-surface-variant mb-md flex-1 line-clamp-2">Master the core concepts of CBC Grade 4 mathematics through puzzles and interactive simulations.</p>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div>
+<span class="text-label-sm text-outline block">Instructor</span>
+<span class="text-label-md font-bold text-on-surface">Ms. Sarah K.</span>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-xl text-label-md hover:bg-primary-container transition-colors shadow-md">Enroll</button>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[0%]"></div>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="group bg-white rounded-2xl border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
+<div class="relative aspect-video rounded-t-2xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A modern laboratory scene with clean white surfaces and colorful chemical reactions in glass beakers. The lighting is bright and professional, utilizing the Adaptive CBC Learning color palette with deep blues and emerald greens to create a high-quality, academic aesthetic for a primary school science course." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUqNaFW9QtPJPWCOtNJkSNB-I7pOyqOP9Rn--5xnch5dlmeHqbtEuqPXpWo1P23m2sxk_i3y1vPLUgANOTawZ-UxXPwQYfCnUmTRSJUkREOYd3kCNC-Yqsb_ke9iGbsj1paWhc3r8JVJvKovZAtx7WFC6y5FrmXoA1PbfLDfogbGw2St72iYRfJxuMAPfEWoZOQuzKIx7MBdRwpWXrU5QQwWH9NNx9LOl-q51AqxG5a_DgIdNL5M0xpPvDpRU9LXIroXInbT532w"/>
+<div class="absolute top-3 left-3 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-label-sm font-bold shadow-sm">KES 1,200</div>
+<div class="absolute bottom-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">4.8</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex items-center gap-xs text-outline mb-xs">
+<span class="material-symbols-outlined text-[16px]">science</span>
+<span class="text-label-sm uppercase tracking-wide">Grade 5 • Science</span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-base line-clamp-1">Environmental conservation</h3>
+<p class="text-body-md text-on-surface-variant mb-md flex-1 line-clamp-2">Learn about Kenya's ecosystem and how you can protect it. Real-world experiments included.</p>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div>
+<span class="text-label-sm text-outline block">Instructor</span>
+<span class="text-label-md font-bold text-on-surface">Dr. Omari P.</span>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-xl text-label-md hover:bg-primary-container transition-colors shadow-md">Enroll</button>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[0%]"></div>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="group bg-white rounded-2xl border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
+<div class="relative aspect-video rounded-t-2xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A cozy, sunlit library corner with stacks of children's books and a glowing digital tablet showing an open e-book. The style is warm, welcoming, and high-quality, with a soft blur on the background and bright white highlights that align with Adaptive CBC Learning's modern education brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPMTVdQTArZ195rNt8PhyzD2x4fF5tZz7dFg9Rf3SdebjAcL0_tGhUM1dQjFw0GUT7fdoCwH3ESo-eif6iqsy1rjQmN08zw4GxPsIyDgF5LaeqptOriTshZoTWEw5Z-AqBdWf3Eh0F7xAqRQuNHl8NM9-QmFNsne2H2A9l_HE2lPGnEYx2w00y9mJeh9r33bwFe5NBRU55i_H0zm11YX1w6w5095Jw6wQG3iHvCHKk5kXkPxzhV7GIwy3LwG_C_pFt-7RacJfnSg"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-label-sm font-bold text-primary">FREE</div>
+<div class="absolute bottom-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">5.0</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex items-center gap-xs text-outline mb-xs">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span class="text-label-sm uppercase tracking-wide">Grade 4 • Literacy</span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-base line-clamp-1">Creative Writing &amp; Poetry</h3>
+<p class="text-body-md text-on-surface-variant mb-md flex-1 line-clamp-2">Unleash your imagination through our unique AI-assisted storytelling module.</p>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div>
+<span class="text-label-sm text-outline block">Instructor</span>
+<span class="text-label-md font-bold text-on-surface">Adaptive CBC Learning</span>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-xl text-label-md hover:bg-primary-container transition-colors shadow-md">Enroll</button>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[0%]"></div>
+</div>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="group bg-white rounded-2xl border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 flex flex-col">
+<div class="relative aspect-video rounded-t-2xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sleek digital workspace with abstract glowing blue waves and geometric nodes, representing digital literacy and technology. The lighting is crisp and modern, featuring the Adaptive CBC Learning deep scholastic blue and success green as accent colors against a pristine background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrfRJZuohK5M4xu_bIxm1S53gT1B75s-ben2BbjASEFqjxHjpxR7V1KgReii2iGcqkBZlRi7KnPBN6yIR-A8K_4ceuCePPVWKnRqmmRmHhU7SDkzICuhH3IZ1YbWedKBY1NYrnsc5h5RFnbq8GzV089dta1xAdAkC4W7OCtWWu2ZXbbEB2BqutGxOFoY8HPj5uCTXMhdh7UU_9EDf79jZw12IayzBdCORYbT7joa05UioEvqM0VJTvgyF5aQVVxB1Aokb-QhSWuw"/>
+<div class="absolute top-3 left-3 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-label-sm font-bold shadow-sm">KES 900</div>
+<div class="absolute bottom-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">4.7</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex items-center gap-xs text-outline mb-xs">
+<span class="material-symbols-outlined text-[16px]">computer</span>
+<span class="text-label-sm uppercase tracking-wide">Grade 6 • ICT</span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-base line-clamp-1">Introduction to Block Coding</h3>
+<p class="text-body-md text-on-surface-variant mb-md flex-1 line-clamp-2">Learn the logic behind programming by building your own simple digital games.</p>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div>
+<span class="text-label-sm text-outline block">Instructor</span>
+<span class="text-label-md font-bold text-on-surface">Eng. David M.</span>
+</div>
+<button class="bg-primary text-white font-bold px-6 py-2 rounded-xl text-label-md hover:bg-primary-container transition-colors shadow-md">Enroll</button>
+</div>
+<div class="mt-md h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[0%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Adaptive CBC Learning Assistant Component -->
+<div class="fixed bottom-24 right-margin-mobile md:right-margin-desktop z-40">
+<div class="bg-secondary-container text-on-secondary-container p-4 rounded-2xl shadow-xl flex items-center gap-md border border-outline-variant max-w-sm">
+<div class="h-12 w-12 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="pr-2">
+<p class="text-label-sm font-bold mb-xs">Adaptive CBC Learning Guide</p>
+<p class="text-body-md text-sm leading-tight italic">"I see you're interested in Science! Based on your last quiz, you might enjoy 'Environmental conservation'."</p>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-on-surface-variant">close</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface-container-lowest dark:bg-surface-dim shadow-[0_-4px_20px_rgba(0,0,0,0.05)] docked full-width bottom-0 fixed rounded-t-xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe py-2 md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-variant/20">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1.5 transition-all duration-200 scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-label-sm font-label-sm">Subjects</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-variant/20">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-label-sm font-label-sm">Practice</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-surface-variant/20">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-label-sm font-label-sm">Analytics</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      PORT: 3001
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:3100}
+    ports:
+      - "${BACKEND_PORT:-3101}:3001"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3101/api}
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3101/api}
+    ports:
+      - "${FRONTEND_PORT:-3100}:3000"
+    depends_on:
+      - backend
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    ports:
+      - "${AI_SERVICE_PORT:-8101}:8001"

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#d3e4fe",
+                    "secondary-fixed": "#d8e3fb",
+                    "inverse-surface": "#213145",
+                    "surface-variant": "#d3e4fe",
+                    "on-primary-fixed": "#00210c",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#111c2d",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "inverse-primary": "#7eda95",
+                    "primary": "#006a34",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "primary-fixed-dim": "#7eda95",
+                    "secondary-container": "#d5e0f8",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#586377",
+                    "on-background": "#0b1c30",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#dce9ff",
+                    "outline-variant": "#becabd",
+                    "surface-container": "#e5eeff",
+                    "on-primary-fixed-variant": "#005227",
+                    "surface": "#f8f9ff",
+                    "on-tertiary-container": "#fcffe3",
+                    "surface-tint": "#006d36",
+                    "outline": "#6f7a6f",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#f6fff3",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary-container": "#767471",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#9af7af",
+                    "primary-container": "#268549",
+                    "on-tertiary-fixed": "#1c1c19",
+                    "inverse-on-surface": "#eaf1ff",
+                    "secondary": "#545f73",
+                    "on-primary": "#ffffff",
+                    "background": "#f8f9ff",
+                    "tertiary-fixed": "#e5e2dd",
+                    "surface-container-low": "#eff4ff",
+                    "surface-dim": "#cbdbf5",
+                    "tertiary": "#5d5c58",
+                    "on-surface-variant": "#3f4940",
+                    "on-surface": "#0b1c30",
+                    "tertiary-fixed-dim": "#c8c6c2",
+                    "on-tertiary-fixed-variant": "#474743"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "card-gap": "32px",
+                    "margin-desktop": "64px",
+                    "base": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Nunito Sans"],
+                    "title-md": ["Nunito Sans"],
+                    "label-sm": ["Nunito Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "display-lg": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "price-lg": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-lg": ["20px", {"lineHeight": "28px", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .book-card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+        }
+        .book-card-shadow:hover {
+            box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-surface dark:bg-on-background shadow-sm">
+<div class="flex justify-between items-center w-full px-gutter max-w-[1280px] mx-auto py-4">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">Adaptive CBC Learning Bookstore</h1>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary py-1" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary transition-colors duration-200" href="#">New Arrivals</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary transition-colors duration-200" href="#">Best Sellers</a>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="relative hidden lg:block w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-full border-none focus:ring-2 focus:ring-primary text-body-md" placeholder="Search for books, authors, or ISBN..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-on-primary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-surface">3</span>
+</button>
+<button class="p-2 text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-[1280px] mx-auto px-gutter py-8 flex gap-card-gap">
+<!-- SideNavBar (Filters) -->
+<aside class="hidden lg:flex flex-col w-64 shrink-0 gap-8">
+<div>
+<h3 class="font-title-md text-title-md mb-4 text-primary">Browse CBC</h3>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-base px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+                        Home
+                    </a>
+<a class="flex items-center gap-base px-4 py-3 text-secondary hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
+                        My Library
+                    </a>
+<a class="flex items-center gap-base px-4 py-3 text-secondary hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+                        Best Sellers
+                    </a>
+<a class="flex items-center gap-base px-4 py-3 text-secondary hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="new_releases">new_releases</span>
+                        New Arrivals
+                    </a>
+</nav>
+</div>
+<div class="h-px bg-outline-variant"></div>
+<section>
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4">Grade Level</h4>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Grade 1 - 3</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Grade 4 - 6</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Junior Secondary (7-9)</span>
+</label>
+</div>
+</section>
+<section>
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4">Subject</h4>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Mathematics</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Science &amp; Tech</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Social Studies</span>
+</label>
+</div>
+</section>
+<section>
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-4">Format</h4>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary" name="format" type="radio"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Physical Book</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary" name="format" type="radio"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Digital E-book</span>
+</label>
+</div>
+</section>
+<div class="mt-auto bg-primary-container p-6 rounded-xl text-on-primary-container">
+<h5 class="font-title-md text-title-md mb-2">Upgrade to Pro</h5>
+<p class="font-label-sm text-label-sm mb-4 opacity-90">Unlock 1,000+ interactive workbooks and teacher guides.</p>
+<button class="w-full py-2 bg-on-primary-container text-primary-container font-bold rounded-lg hover:bg-white transition-colors">Learn More</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-w-0">
+<!-- Hero Banner -->
+<section class="relative overflow-hidden rounded-2xl bg-primary h-[320px] mb-12 flex items-center px-12">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a library bookshelf with soft focus on rows of academic textbooks. The lighting is warm and natural, filtering through a window, creating a studious and intellectual atmosphere. The overall color palette features deep forest greens and rich paper whites, reflecting a professional educational environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpySCpDe4GDSuzejvuGycMx0ExxaXGHFbUETP5e8Vy2EQPVfSvaVAP36e8gRPl4xtLwrWtxcHfiAoGlxbUQE-eW7qIL1Qekdo6Wqz-kzGkAEB8YtPL61mgeZ92Rawc9YxBePBPsPChUFUxQOjY4PhV-AuXAqfz3LGdhlYITzmwJ1pnGjkIF-FPTsOUmbP1zVQw225gMzMRN4VdEtm9o76HPhIb_IzYYSVuT4hFhx2HDcVe2LlfPjte9Dae3BYA7S07rdzu7QuSeA"/>
+</div>
+<div class="relative z-10 max-w-xl">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm rounded-full mb-4">NEW CURRICULUM ARRIVALS</span>
+<h2 class="font-display-lg text-display-lg text-white mb-4">Back to School CBC Essentials</h2>
+<p class="text-on-primary-container font-body-md mb-8 text-lg">Equip your learners with the latest Grade 1-9 materials approved for the Kenyan curriculum.</p>
+<div class="flex gap-4">
+<button class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-primary-fixed transition-all">Shop Now</button>
+<button class="px-8 py-3 border-2 border-white/30 text-white font-bold rounded-lg hover:bg-white/10 transition-all">Download Guide</button>
+</div>
+</div>
+</section>
+<!-- Recommended Section -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Recommended for Your Grade</h2>
+<p class="text-secondary font-body-md">Based on Grade 4 CBC requirements</p>
+</div>
+<button class="text-primary font-bold hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-base">
+<!-- Book Card 1 -->
+<div class="bg-surface p-4 rounded-xl book-card-shadow flex flex-col group transition-all">
+<div class="relative aspect-[3/4] rounded-lg overflow-hidden mb-4 bg-surface-container-high border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A clean, minimalist book cover for a Grade 4 Science Explorer textbook. The design features bright botanical illustrations and geometric science symbols against a crisp white background. The aesthetic is educational and approachable, using the primary green and subtle grey tones of the Adaptive CBC Learning Bookstore brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAl4ixJNuAbVvniHeYyPvM65VobrjwmjCOU-0t1YtEhYkY3x7yhdrhDew9CzUQtJZ6BP1ZEsSCTSrdx0MbsMbdR-CUkIzTP1U_A7MLhTBDsfHDOVt-Ojq4rOiqUyWEoMYZE8WvEq-bKzY6ONl0JW3oLyvWIsLOTKg-mkbCCJ4esCvhFt5Q0A0ap9AscZmLOobOLnDmDwspxf5TTekEKuYRiB4cv3WOaGeYWI89XDOCVxLqe4v5BgpWFiGw-qGH1aD30AnlCmHztQ"/>
+<span class="absolute top-2 left-2 px-2 py-1 bg-on-background text-white text-[10px] font-bold rounded tracking-tight">PHYSICAL BOOK</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-on-background line-clamp-2 mb-1">Grade 4 Science Explorer</h3>
+<p class="text-secondary text-label-sm mb-3">Longhorn Publishers</p>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-outline">star</span>
+<span class="text-label-sm text-secondary ml-1">(124)</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-price-lg text-price-lg text-on-background">KES 850</span>
+<span class="text-label-sm text-secondary line-through">KES 950</span>
+</div>
+<button class="w-full py-2 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="bg-surface p-4 rounded-xl book-card-shadow flex flex-col group transition-all">
+<div class="relative aspect-[3/4] rounded-lg overflow-hidden mb-4 bg-surface-container-high border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Modern book cover for 'Mathematics Mastery Grade 4' featuring clean typography and vibrant orange and green shapes on a recycled paper-textured background. The visual style is tactile and organized, evoking a high-quality educational resource that fits perfectly within the scholarly Adaptive CBC Learning Bookstore aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDOldxpeVqK2HBHD-1drAqBHNtyMzkaiuRFfZB3W_VzhrAUvap_-gWkVo_3UeAHm4Aj486LTYaXkLBK4gRs5DDW0Xmi8Tlm5eejFSYShdYuy3MLEbTeFox8qrldgb2slMj1vx_4pE9kNtubslrJZDwHYHxIxA8a_ldSXKZTa5HEHH8JY6M5lU7oxDfXBou0X2pXEkgIovmWBB-W9sLfHmEtmgFqugyR-CYyczi5vsdaiAq9KzWYCFsMgnwZ66wqZe_BmX6M8seqQ"/>
+<span class="absolute top-2 left-2 px-2 py-1 bg-primary text-white text-[10px] font-bold rounded tracking-tight">DIGITAL E-BOOK</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-on-background line-clamp-2 mb-1">Mathematics Mastery Grade 4</h3>
+<p class="text-secondary text-label-sm mb-3">Oxford East Africa</p>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-secondary ml-1">(89)</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-price-lg text-price-lg text-on-background">KES 450</span>
+</div>
+<button class="w-full py-2 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">cloud_download</span>
+                                Instant Access
+                            </button>
+</div>
+</div>
+<!-- Book Card 3 -->
+<div class="bg-surface p-4 rounded-xl book-card-shadow flex flex-col group transition-all">
+<div class="relative aspect-[3/4] rounded-lg overflow-hidden mb-4 bg-surface-container-high border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Academic book cover design for 'Our World Today: Social Studies'. The cover features a subtle globe illustration in earthy tones and bold, scholarly serif fonts. The lighting is bright and even, highlighting the clean textures of the cover. It maintains the premium, authoritative feel of the Adaptive CBC Learning Bookstore brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbRCAm6XYC0Z9g9PSEC4HTG8uda3cWCgNtHGfzrFiId02E7m17yQ9K4xLgBfkZaPOhzreUHC88aRfW0d1ARPFpBdJMHvXGLTmBk6_iQ4uY4VOpLyRAhRRwEihiYDQ_CuYIZVP9U09RidMZbF83NfuMVKbknFTQJj7cONRDXfX7B3i4ndTGXRJTKNfTnLrKcgh6vhUtG_q8oI8bNud1Lovuo1Eo1fx1LrMYGZXZGsLOW2bA1w_3ba5ddKqth8Mkj-vV5NuroJp9JA"/>
+<span class="absolute top-2 left-2 px-2 py-1 bg-on-background text-white text-[10px] font-bold rounded tracking-tight">PHYSICAL BOOK</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-on-background line-clamp-2 mb-1">Our World Today: Social Studies</h3>
+<p class="text-secondary text-label-sm mb-3">KLB Publishing</p>
+<div class="flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-[#FFD700]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px] text-outline">star</span>
+<span class="text-label-sm text-secondary ml-1">(56)</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-price-lg text-price-lg text-on-background">KES 720</span>
+</div>
+<button class="w-full py-2 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+<!-- Book Card 4 -->
+<div class="bg-surface p-4 rounded-xl book-card-shadow flex flex-col group transition-all opacity-75">
+<div class="relative aspect-[3/4] rounded-lg overflow-hidden mb-4 bg-surface-container-high border border-outline-variant/30 grayscale">
+<img class="w-full h-full object-cover" data-alt="A textbook cover for 'Creative Arts &amp; Music' featuring colorful abstract art and musical notes. The image is presented in a muted grayscale to indicate it is currently out of stock. The layout is clean and professional, matching the scholarly design system of the Adaptive CBC Learning Bookstore." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDug-e6DS2CRobqSNx1HrhumRmFLMW_sx6jKzIS4-w60QwQDSwvtoxo0mkmoSsUkIOPiZ_G0owzZul6owEAzRAMQYDMM4Dpq-W0vXdpm2JaK3tiS3TA78aWEuGrwFtVNeAlpDIRYBQJH6LvzvmSdBcFlD9vfQxVbY1T9jsIxWKagCYCHvYgAqRQsk5jjPWTHLLc1gkk0SZuvPsLiT_-eyNY88UKLMCbAq6p2IytUFJM3ZYbAgoXCfslOws7ly1KFgVGPoIo1eLiMg"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="bg-white text-on-background px-3 py-1 font-bold text-label-sm rounded-full">OUT OF STOCK</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-on-background line-clamp-2 mb-1">Creative Arts &amp; Music</h3>
+<p class="text-secondary text-label-sm mb-3">Moran Publishers</p>
+</div>
+<div class="mt-auto">
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-price-lg text-price-lg text-secondary">KES 600</span>
+</div>
+<button class="w-full py-2 bg-outline-variant text-secondary font-bold rounded-lg cursor-not-allowed" disabled="">Notify Me</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Best Sellers Banner Section -->
+<section class="mb-12 bg-surface-container p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-2">Best Selling Textbooks</h2>
+<p class="text-secondary font-body-md mb-6">The most trusted resources by teachers across Kenya for the 2024 academic year.</p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-outline-variant/30">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-label-sm">Primary (G1-6)</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-outline-variant/30">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-label-sm">Junior Sec (G7-9)</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 max-w-full">
+<!-- Compact Best Seller 1 -->
+<div class="w-32 shrink-0 group">
+<div class="aspect-[3/4] rounded shadow-sm overflow-hidden mb-2">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="A small thumbnail of a best-selling literature book cover with vibrant graphic art. The lighting is studio-quality, emphasizing the high-contrast design. It fits within the Adaptive CBC Learning Bookstore's curated selection of educational and literary materials." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi39FoX5CqqFYV0OkSVAiOYDeyqHBQpiNC-SdRVN0ivGuqSmS2GIugVRcsqRdCjE5DWBrMk_PaLiPGvFMckHU4F0hgdTZzTgc9ivcY-rBpS9MPjxXbg-czckB036achLeEmVFpBw8iteUoQ-gBba8wvJ0Pwazl8hUaPpV8EdtO4EDVYqe_vs4Q_-FTIObtEkScNRNouwK3iV_pOWeF60-ExGZIpUnkz5dxhHfuLaNHoGz40Wm2loUTBJ0SnW0yio4XqYuQZzx5QA"/>
+</div>
+<p class="text-[10px] font-bold text-primary truncate">TOP SELLER</p>
+<p class="text-label-sm font-bold truncate">English Aid G5</p>
+</div>
+<!-- Compact Best Seller 2 -->
+<div class="w-32 shrink-0 group">
+<div class="aspect-[3/4] rounded shadow-sm overflow-hidden mb-2">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="A small thumbnail of a classic literature book cover with a minimalist, scholarly design. High-key lighting highlights the clean paper texture and professional typography, consistent with the Adaptive CBC Learning Bookstore aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZuRifPfiqYnymDQyqBEbFDX2a9mZBosRqLljRh_xPt4PvwoEvkhhcLm4j9nCHuIu4Wl48J4maPTVdDmFS04GNLUBGOWsF2CrqYuxmUAMguuhB-7S3U_pP_7nHqZCNPOVxnZPRyLPJJYAtJ3sSbu_m1LFu2Tmrsni_l1T3pvN2PNZnu-Cbk1WsH8Cw92AccPegaG6uGmFaoZKXHO4NdSNXQ4XCeUtehJ1sEIENdAsWvg0q7IDkmMyU1FEsUOOYwPPyBcC25lvTfg"/>
+</div>
+<p class="text-[10px] font-bold text-primary truncate">TOP SELLER</p>
+<p class="text-label-sm font-bold truncate">Kiswahili G6</p>
+</div>
+<div class="w-32 shrink-0 group">
+<div class="aspect-[3/4] rounded shadow-sm overflow-hidden mb-2">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Thumbnail of a science workbook featuring modern illustrations of cells and atoms. The design is bright and educational, following the Adaptive CBC Learning Bookstore's visual guidelines for Scholarly and Organized content." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgJh2QLfRlIqv4wDoqLqSfy_m5yxGImuFg7kllowRkSNoRTYxaBvMiwGmRGZ4d67h20oD2t4tE3nETFG-xbbGdUQ2kOms0FpP8QFA8fzhYriHYZAd35z4cqJ_c23sdyc4qa1Li61PCAy-9PT2zakdAbG0CWgxq9yj0-LVWefVsF_4YdmAvnICqBTTUrTiE-3cT5eUXej0tXuh2zuCT3_L26peh49KcOkLNy4vHP6DX-dP0hPJr66M_M563S4tVS6fmQoA6pJOm1w"/>
+</div>
+<p class="text-[10px] font-bold text-primary truncate">TOP SELLER</p>
+<p class="text-label-sm font-bold truncate">Home Science</p>
+</div>
+</div>
+</section>
+<!-- Digital Study Guides (Bento Grid Style) -->
+<section class="mb-12">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-6">Digital Study Guides</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-inverse-surface text-white p-8 rounded-2xl flex items-center justify-between overflow-hidden relative group">
+<div class="relative z-10 max-w-xs">
+<h3 class="font-headline-lg text-headline-lg mb-2">Interactive CBC Maps</h3>
+<p class="font-body-md opacity-80 mb-6">Explore Geography and Social Studies with high-resolution digital maps and interactive quizzes.</p>
+<button class="px-6 py-2 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-colors">Start Learning</button>
+</div>
+<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-primary rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative hidden sm:block">
+<img class="w-48 h-48 rounded-xl object-cover shadow-2xl rotate-12 group-hover:rotate-0 transition-transform duration-500" data-alt="A detailed, modern digital map displayed on a tablet screen. The map features educational annotations and high-contrast colors suited for a learning environment. The surrounding space is dark, emphasizing the glowing screen, creating a technologically advanced and focused atmosphere for digital study." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCluCiq_o5XCWJwb4wVP67EnllWOFpdSjV-diu6QHnusHT8ub48pHB7EA-MKkPirbNFQpDPhHlrXTUmjyIFJmMaV1yf9TJMsqZqGXyCgp5zSYSxJd2cg2c3u2nz-ydLbq4WIA4rWIxlcPW6U2yEmlIhh29TrxiyfDC5ZzX2lBgQiYPXtNQ8KELI4C8CW7gWezpzheB2RUqSrwZfGk5E3DrFUWfkclu1VoS5ZUNpS8ts5wO2OWr6mjPyq4Cf-6iLPXuYEj4PghNA7g"/>
+</div>
+</div>
+<div class="bg-primary-container p-8 rounded-2xl flex flex-col justify-between">
+<h3 class="font-title-md text-title-md text-on-primary-container">Revision Notes Bundle</h3>
+<p class="font-label-sm text-on-primary-container opacity-80 mt-2">All subjects for Term 1. Ready for offline use.</p>
+<div class="mt-8 flex items-end justify-between">
+<span class="font-price-lg text-price-lg text-on-primary-container">KES 1,200</span>
+<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="download_for_offline">download_for_offline</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Bottom NavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-50 flex justify-around items-center py-3 px-4 border-t border-outline-variant/20">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] font-medium">Search</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" data-icon="local_library">local_library</span>
+<span class="text-[10px] font-medium">Library</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+<!-- FAB -->
+<button class="fixed bottom-24 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40 lg:bottom-12">
+<span class="material-symbols-outlined text-3xl" data-icon="support_agent">support_agent</span>
+</button>
+</body></html>

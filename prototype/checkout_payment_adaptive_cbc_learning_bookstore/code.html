@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Adaptive CBC Learning Bookstore</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "on-primary-fixed": "#00210c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#586377",
+                    "on-surface-variant": "#3f4940",
+                    "inverse-primary": "#7eda95",
+                    "secondary": "#545f73",
+                    "outline-variant": "#becabd",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#213145",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#e5e2dd",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-fixed": "#111c2d",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary": "#5d5c58",
+                    "primary-fixed-dim": "#7eda95",
+                    "tertiary-fixed-dim": "#c8c6c2",
+                    "primary-fixed": "#9af7af",
+                    "on-surface": "#0b1c30",
+                    "on-tertiary-fixed": "#1c1c19",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary-container": "#f6fff3",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#767471",
+                    "on-tertiary-fixed-variant": "#474743",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#d8e3fb",
+                    "primary": "#006a34",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "on-primary-fixed-variant": "#005227",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#268549",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#fcffe3",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "inverse-on-surface": "#eaf1ff",
+                    "outline": "#6f7a6f",
+                    "secondary-container": "#d5e0f8",
+                    "surface-variant": "#d3e4fe",
+                    "background": "#f8f9ff",
+                    "surface-container": "#e5eeff",
+                    "surface-tint": "#006d36",
+                    "surface": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "card-gap": "32px"
+            },
+            "fontFamily": {
+                    "title-md": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "label-sm": ["Nunito Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "display-lg": ["Nunito Sans"],
+                    "price-lg": ["Nunito Sans"],
+                    "headline-lg-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "price-lg": ["20px", {"lineHeight": "28px", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        body { font-family: 'Nunito Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-background shadow-sm sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-6 md:px-gutter max-w-[1280px] mx-auto py-4">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">
+                Adaptive CBC Learning Bookstore
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Best Sellers</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">New Arrivals</a>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim">
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-[1280px] mx-auto px-6 md:px-gutter py-8">
+<h1 class="font-headline-lg text-headline-lg mb-8 text-on-background">Your Shopping Cart</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-card-gap">
+<!-- Left Side: Cart Items -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Cart Item 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 flex gap-6">
+<div class="w-32 h-44 bg-surface-variant rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+<img alt="Science Explorer Grade 4" class="w-full h-full object-cover" data-alt="A professional and vibrant science textbook cover titled Science Explorer Grade 4 featuring colorful illustrations of molecules and a telescope. The setting is a clean, academic environment with soft, warm studio lighting that highlights the tactile texture of the book paper. The aesthetic is scholarly and modern, using a palette of deep greens and earthy neutrals to evoke intellectual curiosity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzPkGirev3fWrMZyJ61199nBiG2c_QEJkTnnK_NRMRAgceAHUDmO7WICbbf3_o8gDcHb06KRkaJ_nkeUmm66n4ZVMFlq21tARSb8wnkJLE3L49nJ45__4Z4Bf2c6qwoSi78oILsm2TV_67oTWKUtWibr9bZZrF3hv6VZRdy-5X6Ad-C5MxZ8HIqEN58G-o0QjHLujNWUCStTvdX8AM1Jx_jPXt0HBVPWLb64kAsoy2HvaMwgu8TaF-vHM1JCUDZuBvrwKIC4b_9w"/>
+</div>
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex justify-between items-start">
+<h2 class="font-title-md text-title-md text-on-surface">Science Explorer Grade 4</h2>
+<button class="text-secondary hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">Adaptive CBC Learning Education Press</p>
+<span class="inline-flex items-center gap-1 mt-2 px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider">Physical Book</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex items-center border border-outline rounded-lg">
+<button class="px-3 py-1 text-on-surface hover:bg-surface-variant transition-colors">-</button>
+<span class="px-4 py-1 font-title-md text-title-md border-x border-outline">1</span>
+<button class="px-3 py-1 text-on-surface hover:bg-surface-variant transition-colors">+</button>
+</div>
+<div class="text-right">
+<span class="font-price-lg text-price-lg text-primary">KSh 1,250.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 flex gap-6">
+<div class="w-32 h-44 bg-surface-variant rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+<img alt="Mathematics Mastery Grade 4" class="w-full h-full object-cover" data-alt="A clean, minimalist mathematics workbook cover for grade 4 with geometric shapes like cubes and spheres in a modern flat-design style. The background is a soft ivory paper texture under bright, diffused natural light, creating a calm and focused atmosphere. The color scheme features professional greens and deep blues, reflecting the brand identity of a scholarly digital bookstore." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmQ-qeVQHuBRdvIGNm48VZFPndgPijO__0cZ_HY1MCbwmyTgkjaCJj1TRTe1IWq0FAo6OiIwr9H-NCA1UTDKbeVxfxAxN_pY__tWwTBFgkeHc62GkrQrDHgF8LTwpzm2_v2JrD6ZwhLIC3OsV0qdKOrOOOms-bc5mGSyjEE8RMXTLE7w4ljpvVskCKSYiHx9FEwdaqEWmG9L98caN7L0bZcDTsVUwYsTieAoyWt08H-_SJK1aoVntPROSFij5l8u2cDLczFBOPhA"/>
+</div>
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex justify-between items-start">
+<h2 class="font-title-md text-title-md text-on-surface">Mathematics Mastery Grade 4</h2>
+<button class="text-secondary hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">Oxford Academic</p>
+<span class="inline-flex items-center gap-1 mt-2 px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-wider">E-Book</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex items-center border border-outline rounded-lg">
+<button class="px-3 py-1 text-on-surface hover:bg-surface-variant transition-colors">-</button>
+<span class="px-4 py-1 font-title-md text-title-md border-x border-outline">1</span>
+<button class="px-3 py-1 text-on-surface hover:bg-surface-variant transition-colors">+</button>
+</div>
+<div class="text-right">
+<span class="font-price-lg text-price-lg text-primary">KSh 950.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery & Contact Information -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/30 space-y-6">
+<h3 class="font-title-md text-title-md flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                        Delivery &amp; Contact Details
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-secondary uppercase block">Full Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-secondary uppercase block">Phone Number</label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="+254 700 000 000" type="tel"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-sm text-label-sm text-secondary uppercase block">Delivery Address (Physical Books Only)</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="House number, Street name, Estate, City" rows="3"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Checkout Summary & Payment -->
+<div class="lg:col-span-5">
+<div class="bg-surface-container-low p-8 rounded-xl shadow-md sticky top-28 border border-outline-variant/20">
+<h3 class="font-title-md text-title-md mb-6">Order Summary</h3>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-secondary">Subtotal (2 items)</span>
+<span class="text-on-surface">KSh 2,200.00</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-secondary">Delivery Fee</span>
+<span class="text-on-surface">KSh 250.00</span>
+</div>
+<div class="border-t border-outline-variant pt-4 flex justify-between">
+<span class="font-title-md text-title-md">Total</span>
+<span class="font-price-lg text-price-lg text-primary">KSh 2,450.00</span>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Select Payment Method</h4>
+<div class="grid grid-cols-1 gap-3">
+<!-- M-Pesa Option -->
+<label class="relative flex items-center p-4 border border-primary bg-primary-container/10 rounded-lg cursor-pointer transition-all">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary" name="payment" type="radio"/>
+<div class="ml-4 flex items-center justify-between w-full">
+<div>
+<p class="font-title-md text-title-md text-on-primary-container">M-Pesa</p>
+<p class="font-label-sm text-label-sm text-secondary">Pay via mobile money</p>
+</div>
+<div class="bg-[#1DB954] text-white font-bold px-3 py-1 rounded text-[10px]">MPESA</div>
+</div>
+</label>
+<!-- Card Option -->
+<label class="relative flex items-center p-4 border border-outline-variant hover:border-primary rounded-lg cursor-pointer transition-all">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="payment" type="radio"/>
+<div class="ml-4 flex items-center justify-between w-full">
+<div>
+<p class="font-title-md text-title-md">Credit/Debit Card</p>
+<p class="font-label-sm text-label-sm text-secondary">Visa, Mastercard, Amex</p>
+</div>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-secondary" data-icon="credit_card">credit_card</span>
+</div>
+</div>
+</label>
+</div>
+<div class="bg-surface-container p-4 rounded-lg flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Your transaction is encrypted and secure. We do not store your full card or mobile money PIN details.</p>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-white font-title-md py-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                            Secure Checkout
+                        </button>
+</div>
+<div class="mt-6 flex items-center justify-center gap-4 grayscale opacity-60">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer for Focused Checkout -->
+<footer class="mt-20 border-t border-outline-variant/30 py-8 bg-surface-container-low">
+<div class="max-w-[1280px] mx-auto px-6 text-center space-y-4">
+<p class="font-label-sm text-label-sm text-secondary">© 2024 Adaptive CBC Learning Bookstore. All rights reserved.</p>
+<div class="flex justify-center gap-6 font-label-sm text-label-sm text-secondary uppercase tracking-widest">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Refund Policy</a>
+</div>
+</div>
+</footer>
+</body></html>
