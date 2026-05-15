@@ -142,7 +142,7 @@ Empty States: Always include an illustration (SVG) and a clear CTA to "Get Start
 
 
 
-Framework: React or Next.js.
+Framework: Next.js.
 
 
 

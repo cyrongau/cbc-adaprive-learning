@@ -19,6 +19,6 @@ COPY package.json package-lock.json ./
 COPY frontend/package.json frontend/package.json
 RUN npm ci --omit=dev --workspace frontend
 COPY --from=build /app/frontend/.next frontend/.next
-COPY --from=build /app/frontend/next.config.ts frontend/next.config.ts
+COPY --from=build /app/frontend/next.config.js frontend/next.config.js
 EXPOSE 3000
 CMD ["npm", "--workspace", "frontend", "run", "start"]
