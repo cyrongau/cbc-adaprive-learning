@@ -27,6 +27,17 @@ The onboarding flow creates the first adaptive student profile before normal rev
 - suspected weak topics,
 - confidence score for the learner profile.
 
+## Phase 1 Student Access
+
+The current student auth flow is intentionally lightweight and in-memory. It supports:
+
+- demo login with `amani@example.com` / `password123`,
+- student registration with name, email, password, grade, and school term,
+- automatic creation of a starter learner profile,
+- handoff into onboarding, practice, OCR review, and analytics.
+
+This is suitable for validating the user journey before replacing in-memory data with persistent database-backed accounts and secure token/session handling.
+
 ## Local Development
 
 Install Node dependencies from the repository root:

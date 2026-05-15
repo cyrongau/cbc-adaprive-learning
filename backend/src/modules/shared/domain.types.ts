@@ -16,6 +16,11 @@ export interface User {
   onboardingStatus?: OnboardingStatus;
 }
 
+export interface AuthCredential {
+  userId: string;
+  passwordHash: string;
+}
+
 export interface Subject {
   id: string;
   name: string;

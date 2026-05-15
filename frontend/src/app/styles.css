@@ -57,6 +57,102 @@ button {
   min-height: 100vh;
 }
 
+.authShell {
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  min-height: 100vh;
+  padding: 48px min(8vw, 120px);
+}
+
+.authHero {
+  background: var(--md-sys-color-primary-container);
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(0, 106, 52, 0.18);
+  color: var(--md-sys-color-on-primary-container);
+  overflow: hidden;
+  padding: 40px;
+}
+
+.authHero h1 {
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  letter-spacing: 0;
+  line-height: 1.04;
+  margin: 0;
+  max-width: 760px;
+}
+
+.authHero p {
+  color: rgba(246, 255, 243, 0.88);
+  line-height: 1.65;
+  max-width: 660px;
+}
+
+.authCard {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(190, 202, 189, 0.75);
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(30, 56, 47, 0.1);
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.authCard label {
+  color: var(--md-sys-color-on-surface);
+  display: grid;
+  gap: 7px;
+  font-weight: 850;
+}
+
+.authCard input,
+.authCard select {
+  border: 1px solid #b9c8c1;
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 10px 12px;
+}
+
+.authSwitch {
+  background: var(--md-sys-color-surface-container);
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+}
+
+.authSwitch button {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 900;
+  min-height: 38px;
+}
+
+.authSwitch button.active {
+  background: #ffffff;
+  color: var(--md-sys-color-primary);
+  box-shadow: 0 4px 12px rgba(30, 56, 47, 0.08);
+}
+
+.authError {
+  background: #ffdad6;
+  border-radius: 8px;
+  color: #93000a;
+  font-weight: 850;
+  margin: 0;
+  padding: 10px 12px;
+}
+
+.authHint {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
 .topAppBar {
   align-items: center;
   backdrop-filter: blur(16px);
@@ -628,6 +724,7 @@ details p {
 }
 
 @media (max-width: 960px) {
+  .authShell,
   .appShell,
   .workGrid,
   .analyticsGrid,
@@ -671,6 +768,15 @@ details p {
 }
 
 @media (max-width: 560px) {
+  .authShell {
+    padding: 18px;
+  }
+
+  .authHero,
+  .authCard {
+    padding: 20px;
+  }
+
   .content,
   .topAppBar {
     padding-left: 16px;

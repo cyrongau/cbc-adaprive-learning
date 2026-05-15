@@ -3,7 +3,16 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3101/api';
-const studentId = 'student-001';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'student' | 'admin' | 'teacher';
+  grade?: number;
+  schoolTerm?: string;
+  onboardingStatus?: string;
+}
 
 interface Topic {
   id: string;
@@ -68,6 +77,13 @@ interface StudentProfile {
 }
 
 type View = 'onboarding' | 'practice' | 'ocr' | 'analytics';
+type AuthMode = 'login' | 'register';
+
+interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: User;
+}
 
 const emptyPerformance: Performance = {
   totalAttempts: 0,
@@ -95,6 +111,8 @@ async function getJson<T>(path: string, fallback: T): Promise<T> {
 }
 
 export default function Home() {
+  const [authMode, setAuthMode] = useState<AuthMode>('login');
+  const [activeUser, setActiveUser] = useState<User | null>(null);
   const [view, setView] = useState<View>('onboarding');
   const [topics, setTopics] = useState<Topic[]>([]);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -108,16 +126,24 @@ export default function Home() {
   const [grade, setGrade] = useState(9);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [feedback, setFeedback] = useState<Record<string, string>>({});
-  const [notice, setNotice] = useState('Using mocked student account: Amani Otieno.');
+  const [notice, setNotice] = useState('Sign in or register to start a Phase 1 learner session.');
+  const [authError, setAuthError] = useState('');
+  const [authForm, setAuthForm] = useState({
+    name: 'Amani Otieno',
+    email: 'amani@example.com',
+    password: 'password123',
+    grade: 9,
+    schoolTerm: 'term-two',
+  });
 
-  async function loadData() {
+  async function loadData(currentStudentId: string) {
     const [topicData, questionData, uploadData, sessionData, profileData, performanceData] = await Promise.all([
       getJson<Topic[]>('/curriculum/subjects/math/topics', []),
       getJson<Question[]>('/questions?subjectId=math', []),
       getJson<Upload[]>('/uploads', []),
-      getJson<OnboardingSession>(`/onboarding/students/${studentId}/session`, { purpose: '', questions: [] }),
-      getJson<StudentProfile>(`/onboarding/students/${studentId}/profile`, emptyProfile),
-      getJson<Performance>(`/analytics/students/${studentId}/performance`, emptyPerformance),
+      getJson<OnboardingSession>(`/onboarding/students/${currentStudentId}/session`, { purpose: '', questions: [] }),
+      getJson<StudentProfile>(`/onboarding/students/${currentStudentId}/profile`, emptyProfile),
+      getJson<Performance>(`/analytics/students/${currentStudentId}/performance`, emptyPerformance),
     ]);
 
     setTopics(topicData);
@@ -133,8 +159,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-    void loadData();
-  }, []);
+    if (activeUser) {
+      void loadData(activeUser.id);
+    }
+  }, [activeUser]);
 
   const activeQuestion = questions[0];
   const weakTopics = profile.weakTopics.length ? profile.weakTopics : performance.weakTopics;
@@ -150,23 +178,68 @@ export default function Home() {
     [],
   );
 
+  async function submitAuth(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setAuthError('');
+
+    const path = authMode === 'login' ? '/auth/login' : '/auth/register/student';
+    const payload =
+      authMode === 'login'
+        ? { email: authForm.email, password: authForm.password }
+        : {
+            name: authForm.name,
+            email: authForm.email,
+            password: authForm.password,
+            grade: authForm.grade,
+            schoolTerm: authForm.schoolTerm,
+          };
+
+    const response = await fetch(`${apiUrl}${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ message: 'Authentication failed.' }));
+      setAuthError(Array.isArray(error.message) ? error.message.join(' ') : error.message);
+      return;
+    }
+
+    const sessionResponse = (await response.json()) as AuthResponse;
+    setActiveUser(sessionResponse.user);
+    setGrade(sessionResponse.user.grade ?? authForm.grade);
+    setTerm(sessionResponse.user.schoolTerm ?? authForm.schoolTerm);
+    setNotice(
+      authMode === 'login'
+        ? `Welcome back, ${sessionResponse.user.name}.`
+        : `Profile created for ${sessionResponse.user.name}. Complete onboarding to sharpen recommendations.`,
+    );
+  }
+
   async function submitOnboarding(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!activeUser) {
+      return;
+    }
     await fetch(`${apiUrl}/onboarding/profiles`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        studentId,
+        studentId: activeUser.id,
         grade,
         schoolTerm: term,
         chosenTopicIds: selectedTopics,
       }),
     });
     setNotice('Profile updated. Diagnostic questions refreshed from mocked onboarding data.');
-    await loadData();
+    await loadData(activeUser.id);
   }
 
   async function submitAttempt(question: Question, answer: string) {
+    if (!activeUser) {
+      return;
+    }
     if (!answer.trim()) {
       setFeedback((current) => ({ ...current, [question.id]: 'Enter an answer first.' }));
       return;
@@ -175,20 +248,107 @@ export default function Home() {
     const result = await fetch(`${apiUrl}/attempts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ studentId, questionId: question.id, submittedAnswer: answer }),
+      body: JSON.stringify({ studentId: activeUser.id, questionId: question.id, submittedAnswer: answer }),
     });
     const attempt = result.ok ? await result.json() : null;
     setFeedback((current) => ({
       ...current,
       [question.id]: attempt?.isCorrect ? 'Correct. This attempt improved the profile signal.' : 'Not quite. Review the explanation and try another item.',
     }));
-    await loadData();
+    await loadData(activeUser.id);
   }
 
   async function approveUpload(uploadId: string) {
     await fetch(`${apiUrl}/uploads/${uploadId}/approve`, { method: 'PATCH' });
     setNotice('OCR item approved in the mocked review queue.');
-    await loadData();
+    if (activeUser) {
+      await loadData(activeUser.id);
+    }
+  }
+
+  if (!activeUser) {
+    return (
+      <main className="authShell">
+        <section className="authHero">
+          <p className="heroPill">Adaptive CBC Learning</p>
+          <h1>Start with a learner profile, not a blank dashboard.</h1>
+          <p>
+            Students register with grade and term details, then move into topic coverage checks and diagnostic
+            questions before adaptive practice begins.
+          </p>
+        </section>
+
+        <form className="authCard" onSubmit={submitAuth}>
+          <div className="panelHeader">
+            <p className="eyebrow">Student access</p>
+            <h2>{authMode === 'login' ? 'Sign in to the mock account' : 'Create a student profile'}</h2>
+          </div>
+          <div className="authSwitch" role="tablist" aria-label="Authentication mode">
+            <button className={authMode === 'login' ? 'active' : ''} onClick={() => setAuthMode('login')} type="button">
+              Sign in
+            </button>
+            <button className={authMode === 'register' ? 'active' : ''} onClick={() => setAuthMode('register')} type="button">
+              Register
+            </button>
+          </div>
+          {authMode === 'register' ? (
+            <label>
+              Student name
+              <input
+                onChange={(event) => setAuthForm((current) => ({ ...current, name: event.target.value }))}
+                value={authForm.name}
+              />
+            </label>
+          ) : null}
+          <label>
+            Email
+            <input
+              onChange={(event) => setAuthForm((current) => ({ ...current, email: event.target.value }))}
+              type="email"
+              value={authForm.email}
+            />
+          </label>
+          <label>
+            Password
+            <input
+              onChange={(event) => setAuthForm((current) => ({ ...current, password: event.target.value }))}
+              type="password"
+              value={authForm.password}
+            />
+          </label>
+          {authMode === 'register' ? (
+            <>
+              <label>
+                Class grade
+                <input
+                  max={12}
+                  min={1}
+                  onChange={(event) => setAuthForm((current) => ({ ...current, grade: Number(event.target.value) }))}
+                  type="number"
+                  value={authForm.grade}
+                />
+              </label>
+              <label>
+                School session
+                <select
+                  onChange={(event) => setAuthForm((current) => ({ ...current, schoolTerm: event.target.value }))}
+                  value={authForm.schoolTerm}
+                >
+                  <option value="term-one">Term One</option>
+                  <option value="term-two">Term Two</option>
+                  <option value="term-three">Term Three</option>
+                </select>
+              </label>
+            </>
+          ) : null}
+          {authError ? <p className="authError">{authError}</p> : null}
+          <button className="primaryButton" type="submit">
+            {authMode === 'login' ? 'Sign in' : 'Create profile'}
+          </button>
+          <p className="authHint">Demo account: amani@example.com / password123</p>
+        </form>
+      </main>
+    );
   }
 
   return (
@@ -217,8 +377,12 @@ export default function Home() {
               emoji_events
             </span>
           </button>
-          <div className="avatar" aria-label="Amani Otieno">
-            AO
+          <div className="avatar" aria-label={activeUser.name}>
+            {activeUser.name
+              .split(' ')
+              .map((part) => part[0])
+              .join('')
+              .slice(0, 2)}
           </div>
         </div>
       </header>
@@ -232,7 +396,7 @@ export default function Home() {
           </span>
           <div>
             <strong>Adaptive CBC Learning</strong>
-            <p>Grade 9 Student</p>
+            <p>Grade {activeUser.grade ?? grade} Student</p>
           </div>
         </div>
         <nav className="sideNav" aria-label="App sections">
@@ -262,7 +426,7 @@ export default function Home() {
         <header className="appHero">
           <div>
             <p className="heroPill">Mocked Phase 1 App</p>
-            <h1>Habari, Amani. Ready for today&apos;s learning path?</h1>
+            <h1>Habari, {activeUser.name.split(' ')[0]}. Ready for today&apos;s learning path?</h1>
             <p>
               Start with onboarding diagnostics, continue adaptive Mathematics practice, and review AI-extracted
               papers with a human check before publishing.
@@ -279,7 +443,7 @@ export default function Home() {
           <figure className="heroVisual">
             <img
               alt="Student using a tablet for CBC learning"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe9Gigkmm3w1tt0JOqBkFXRI7Bmxhy_E1MHEeqNGoQnTc9lBGK71jSKaS8_rOVefFKo2Mb5S9E5aSfEnAAfwhvmeK1RbB0Pi5FqLrsNqhXqwkVqDV8CGHamrLslCiYZZmoxwJfJMgKyPPs_-9sbSdMiAACeVisq9nf4dgzc8MZ-uWxVhTDRjjegTOiz8IS7wxJPMZlwJqLqDFWcgBqpqz3C6XG29aG_FkAbUDafPLfxj6_ok_HCJKEcLe9SHBVLo7LYplo24dq9w"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe9Gigkmm3w1tt0JOqBkFXRI7Bmxhy_E1MHEeqNGoQnTc9lBGK71jSKaS8_rOVefFKo2Mb5S9E5aSfEnAAfwhvmeK1RbB0Pi5FqLrsNqhXqwkVqDV8CGHamrLslCiYZZmoxwJfJMgKyPPs_-9sbSdMiAACeVisq9nf4dgzc8MZ-uWxVhTDRjjegTOiz8IS7wxJPMZlwJqLqDFWcgBqpqz3C6XG29aG_FkAbUDafPLfxj6_ok_HCJKEcLe9SHBVLo7LYplo24dq9g"
             />
             <figcaption>{notice}</figcaption>
           </figure>

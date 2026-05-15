@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {
   Attempt,
+  AuthCredential,
   OcrResult,
   OnboardingQuestion,
   PaperUpload,
@@ -13,6 +14,17 @@ import {
 
 @Injectable()
 export class SeedRepository {
+  readonly credentials: AuthCredential[] = [
+    {
+      userId: 'student-001',
+      passwordHash: 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f',
+    },
+    {
+      userId: 'admin-001',
+      passwordHash: 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f',
+    },
+  ];
+
   readonly users: User[] = [
     {
       id: 'student-001',
